@@ -12,6 +12,7 @@ import {
   Route,
 } from "react-router-dom";
 import Dashboard from './components/DashboardContent';
+import PrivateRoute from './utilities/PrivateRoute';
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -20,8 +21,8 @@ i18n
   .init({
     fallbackLng: "en",
     detection: { order: ['cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'], caches: ['cookie'] },
-    backend:{loadPath: `/assets/locales/fr/translation.json`} 
-    });
+    backend: { loadPath: `/assets/locales/fr/translation.json` }
+  });
 
 
 function App() {
@@ -29,13 +30,15 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}/>    
-      <Route path='/login' element={<Login />} />
-      <Route path='register' element={<Register />} />
-      <Route path='dashport' element={<Dashboard />} />
-    </Routes>
-  </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path='dasboard'  element={<Dashboard />}/>
+        </Route>
+        <Route path='login'  element={<Login />}/>
+        <Route path='register' element={<Register />} />
+
+      </Routes>
+    </BrowserRouter>
   );
 }
 
