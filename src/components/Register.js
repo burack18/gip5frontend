@@ -27,13 +27,16 @@ function Copyright(props) {
   }
   const theme = createTheme();
 export default function Register() {
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });
+        let request={
+          email:data.get('email'),
+          password:data.get('password'),
+          firstName:data.get('firstName'),
+          lastName:data.get('lastName')
+        }
+        console.log(event)
       };
   return (
     <ThemeProvider theme={theme}>
@@ -114,7 +117,7 @@ export default function Register() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="login" variant="body2">
                 Already have an account? Sign in
               </Link>
             </Grid>
