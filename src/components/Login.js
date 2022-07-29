@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Axios from 'axios';
+import { toast } from 'react-toastify';
 
 
 
@@ -35,16 +36,19 @@ export default  function Login() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         let credentials={
-            username:data.get('email'),
+            email:data.get('email'),
             password:data.get('password')
         }
         
-      const d = await  Axios.post('http://localhost:8080/api/auth/login',credentials)
-      console.log({
-          email: data.get('email'),
-          password: data.get('password'),
-        });}
-    const theme = createTheme();
+        try {
+          const response = await  Axios.post('http://localhost:8080/api/auth/login',credentials)
+          toast.success(response.data.message)
+        } catch (error) {
+          console.log(error)
+          toast.error(error.response.data.message)
+        }
+      }
+      const theme = createTheme();
 
   return (
     <ThemeProvider theme={theme}>

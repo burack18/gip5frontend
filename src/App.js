@@ -14,6 +14,9 @@ import {
 import Dashboard from './components/DashboardContent';
 import PrivateRoute from './utilities/PrivateRoute';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .use(LanguageDetector)
@@ -29,15 +32,20 @@ function App() {
   const { t } = useTranslation();
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<PrivateRoute />}>
-          <Route path='dasboard'  element={<Dashboard />}/>
-        </Route>
-        <Route path='login'  element={<Login />}/>
-        <Route path='register' element={<Register />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path='dasboard' element={<Dashboard />} />
+          </Route>
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+
+        </Routes>
+      </BrowserRouter>
+      <ToastContainer />
+    </div>
   );
 }
 

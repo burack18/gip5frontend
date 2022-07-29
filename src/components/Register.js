@@ -36,7 +36,7 @@ export default function Register() {
           firstName:data.get('firstName'),
           lastName:data.get('lastName')
         }
-        console.log(event)
+        
       };
   return (
     <ThemeProvider theme={theme}>
