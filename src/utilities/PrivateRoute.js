@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Navigate, Outlet, Route, useNavigate } from "react-router-dom";
 import Login from "../components/Login";
 
 
 function PrivateRoute({ children, ...rest }) {
-   // let auth = useAuth();
-   const navigate=useNavigate();
+   const user =useSelector(state=>state.user)
+  const navigate=useNavigate();
+  console.log(user)
   useEffect(() => {
-        navigate("login")
+      user.data?.token||navigate("login")
   }, [])
    return <Outlet/>       
 }

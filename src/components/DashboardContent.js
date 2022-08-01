@@ -19,8 +19,15 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { Tooltip } from '@mui/material';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { logout } from '../features/user/userSlice';
 
 function Copyright(props) {
   return (
@@ -55,6 +62,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     '& .MuiDrawer-paper': {
@@ -81,13 +89,49 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+
+
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const openMenu = Boolean(anchorEl);
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = (setting) => {
+    if(setting=='Logout'){
+      dispatch(logout())
+      navigate('/login')
+    }
+    setAnchorElUser(null);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const loginPopUp = () => {
+    setAnchorEl(true)
+  }
+  const pages = ['Products', 'Pricing', 'Blog'];
+  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -120,12 +164,36 @@ function DashboardContent() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
+            <div>
+            <Tooltip title="Open settings">
+              <IconButton color="inherit" onClick={handleOpenUserMenu}>
+                <AccountCircleIcon />
+              </IconButton>
+              </Tooltip>
+            </div>
+          </Toolbar>     
+        <Menu
+          sx={{ mt: '35px' }}
+          id="menu-appbar"
+          anchorEl={anchorElUser}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          open={Boolean(anchorElUser)}
+          onClose={handleCloseUserMenu}
+        >
+          {settings.map((setting) => (
+            <MenuItem key={setting} onClick={()=>handleCloseUserMenu(setting)}>
+              <Typography textAlign="center" >{setting}</Typography>
+            </MenuItem>
+          ))}
+        </Menu>
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
@@ -139,6 +207,7 @@ function DashboardContent() {
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
+
           </Toolbar>
           <Divider />
           <List component="nav">
@@ -199,6 +268,8 @@ function DashboardContent() {
           </Container>
         </Box>
       </Box>
+
+
     </ThemeProvider>
   );
 }

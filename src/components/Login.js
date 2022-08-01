@@ -14,7 +14,9 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Axios from 'axios';
 import { toast } from 'react-toastify';
-
+import { useSelector,useDispatch } from 'react-redux';
+import { loginUser } from '../features/user/userSlice';
+import {useNavigate}from 'react-router-dom';
 
 
 function Copyright(props) {
@@ -32,26 +34,25 @@ function Copyright(props) {
   
 
 export default  function Login() {
+  const navigate=useNavigate();
+  const user=useSelector(state=>state.user);
+  const dispatch=useDispatch();
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        let credentials={
-            email:data.get('email'),
-            password:data.get('password')
-        }
-        
-        try {
-          const response = await  Axios.post('http://localhost:8080/api/auth/login',credentials)
-          toast.success(response.data.message)
-        } catch (error) {
-          console.log(error)
-          toast.error(error.response.data.message)
-        }
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      let credentials={
+          email:data.get('email'),
+          password:data.get('password')
       }
+      dispatch(loginUser(credentials)).unwrap().then(x=>navigate('/dashboard'))
+    }
+        
+    
       const theme = createTheme();
 
   return (
     <ThemeProvider theme={theme}>
+      
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -66,7 +67,7 @@ export default  function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+         
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -99,7 +100,8 @@ export default  function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Login
+              
             </Button>
             <Grid container>
               <Grid item xs>

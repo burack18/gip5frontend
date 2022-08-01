@@ -1,7 +1,11 @@
-import {combineReducers} from 'redux'
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from '../features/user/userSlice'
 
 
-const rootReducer = combineReducers({
-    user:()=>{}
+export const store  = configureStore({
+    reducer:{
+        user:userReducer
+    },
+    middleware:(getDefaultMiddleware)=>getDefaultMiddleware({serializableCheck:false}),
 })
-export default rootReducer;
+export default store;

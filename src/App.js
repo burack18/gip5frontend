@@ -37,7 +37,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<PrivateRoute />}>
-            <Route path='dasboard' element={<Dashboard />} />
+            <Route path='dashboard' element={<Dashboard />} />
           </Route>
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
