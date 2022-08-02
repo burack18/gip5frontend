@@ -17,6 +17,7 @@ export const userSlice=createSlice({
             state.data={}
             state.error=''
             state.isLoaded=true
+            localStorage.clear()
             toaster('success','Successfully Logout')
         }
     },
@@ -28,8 +29,15 @@ export const userSlice=createSlice({
         })
         .addCase(loginUser.fulfilled,(state,action)=>{
             state.isLoaded=true
-            console.log(action.payload.data?.data)
-            state.data=action.payload.data?.data
+            const response=action.payload.data?.data
+            let user={
+                role:response.authorities[0],
+                firstname:response.firstName,
+                surname:response.surName,
+                username:response.userName
+            }
+            localStorage.setItem('token',response.token)
+            state.data=user
             toaster('success',action.payload.data.message)
        })
         .addCase(loginUser.rejected,(state,action)=>{
@@ -47,7 +55,7 @@ export const loginUser=createAsyncThunk(
      async(credentials)=>{
         let response;
         try {
-            response=await axios.post(`${process.env.REACT_APP_BASEURL}/auth/login`,credentials);     
+            response=await axios.post(`${process.env.REACT_APP_BASEURL}/auth/login`,credentials);  
         } catch (error) {
             console.log(error)
             const customError = {

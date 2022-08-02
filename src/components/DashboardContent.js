@@ -24,9 +24,9 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Tooltip } from '@mui/material';
+import { Button, Tooltip } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
 
 function Copyright(props) {
@@ -96,9 +96,9 @@ const mdTheme = createTheme();
 function DashboardContent() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const openMenu = Boolean(anchorEl);
-  const navigate=useNavigate();
-  const dispatch=useDispatch();
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -118,7 +118,7 @@ function DashboardContent() {
   };
 
   const handleCloseUserMenu = (setting) => {
-    if(setting=='Logout'){
+    if (setting == 'Logout') {
       dispatch(logout())
       navigate('/login')
     }
@@ -165,35 +165,38 @@ function DashboardContent() {
               Dashboard
             </Typography>
             <div>
-            <Tooltip title="Open settings">
-              <IconButton color="inherit" onClick={handleOpenUserMenu}>
-                <AccountCircleIcon />
-              </IconButton>
+              <Tooltip title="Open settings">
+                {user.data.username === undefined ? <Button variant='contained' color='error' >Login</Button>
+                  : <IconButton color="inherit" onClick={handleOpenUserMenu}>
+                    <AccountCircleIcon />
+                  </IconButton>
+                }
+
               </Tooltip>
             </div>
-          </Toolbar>     
-        <Menu
-          sx={{ mt: '35px' }}
-          id="menu-appbar"
-          anchorEl={anchorElUser}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
-        >
-          {settings.map((setting) => (
-            <MenuItem key={setting} onClick={()=>handleCloseUserMenu(setting)}>
-              <Typography textAlign="center" >{setting}</Typography>
-            </MenuItem>
-          ))}
-        </Menu>
+          </Toolbar>
+          <Menu
+            sx={{ mt: '35px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
+                <Typography textAlign="center" >{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
         </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar

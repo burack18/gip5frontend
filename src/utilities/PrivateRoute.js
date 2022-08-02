@@ -8,8 +8,12 @@ function PrivateRoute({ children, ...rest }) {
    const user =useSelector(state=>state.user)
   const navigate=useNavigate();
   console.log(user)
+  if(user.data.username===undefined){
+    navigate("login")
+  }
   useEffect(() => {
-      user.data?.token||navigate("login")
+    if(user.data.username===undefined)
+      navigate("login")
   }, [])
    return <Outlet/>       
 }
