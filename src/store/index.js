@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from '../features/user/userSlice'
-
+import autosReducer from '../features/auto/autoSlice'
 
 export const store  = configureStore({
     reducer:{
-        user:userReducer
+        user:userReducer,
+        autos:autosReducer
     },
     middleware:(getDefaultMiddleware)=>getDefaultMiddleware({serializableCheck:false}),
 })

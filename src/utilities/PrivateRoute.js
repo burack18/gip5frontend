@@ -7,7 +7,6 @@ import Login from "../components/Login";
 function PrivateRoute({ children, ...rest }) {
    const user =useSelector(state=>state.user)
   const navigate=useNavigate();
-  console.log(user)
   if(user.data.username===undefined){
     navigate("login")
   }

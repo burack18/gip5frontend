@@ -65,6 +65,7 @@ export const loginUser=createAsyncThunk(
               };
               throw customError;           
         }
+        console.log(response)
         return response
      }
 )

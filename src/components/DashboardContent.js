@@ -28,6 +28,8 @@ import { Button, Tooltip } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
+import Slide from '@mui/material/Slide';
+import { fetchAutos } from '../features/auto/autosAsyncThunk';
 
 function Copyright(props) {
   return (
@@ -100,6 +102,13 @@ function DashboardContent() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
   const [open, setOpen] = React.useState(true);
+
+ 
+  
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -263,7 +272,7 @@ function DashboardContent() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  <Orders  transition={Transition}/>
                 </Paper>
               </Grid>
             </Grid>
