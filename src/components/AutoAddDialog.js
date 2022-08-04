@@ -16,11 +16,12 @@ import { Formik, Field, Form } from 'formik';
 import { Label } from 'recharts';
 import { addAuto } from '../features/auto/autosAsyncThunk';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import { useNavigate } from 'react-router-dom';
 
 
 export const AutoAddDialog = ({ open, handleClose,transition }) => {
  const dispatch=useDispatch();
-
+ const navigate=useNavigate(); 
   return (
     <div>
       <Dialog
@@ -56,7 +57,7 @@ export const AutoAddDialog = ({ open, handleClose,transition }) => {
             }}
             onSubmit={(values) => {
               console.log(values);
-              dispatch(addAuto(values))
+              dispatch(addAuto(values)).unwrap().then(x=>handleClose())
             }}
 
 
