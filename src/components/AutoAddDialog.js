@@ -19,9 +19,10 @@ import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useNavigate } from 'react-router-dom';
 
 
-export const AutoAddDialog = ({ open, handleClose,transition }) => {
+export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
  const dispatch=useDispatch();
  const navigate=useNavigate(); 
+ console.log(autoInitval)
   return (
     <div>
       <Dialog
@@ -50,14 +51,19 @@ export const AutoAddDialog = ({ open, handleClose,transition }) => {
         </AppBar>
         <Container maxWidth="md">
           <Formik
+            
             initialValues={{
-              merk: '',
-              model: '',
-              plateNumber: '',
+              merk: autoInitval?.merk||'',
+              model: autoInitval?.model||'',
+              plateNumber: autoInitval?.plateNumber||'',
             }}
             onSubmit={(values) => {
-              console.log(values);
-              dispatch(addAuto(values)).unwrap().then(x=>handleClose())
+              if(autoInitval?.autoId!==undefined)
+              console.log('edit')
+              else{
+              console.log('add')
+              }
+            //  dispatch(addAuto(values)).unwrap().then(x=>handleClose())
             }}
 
 
@@ -77,7 +83,7 @@ export const AutoAddDialog = ({ open, handleClose,transition }) => {
                       id="outlined-required"
                       label="Required"
                       onChange={handleChange}
-                      value={values.firstName}
+                      value={values.model}
                     />
                   </div>
                   <div>
@@ -89,7 +95,7 @@ export const AutoAddDialog = ({ open, handleClose,transition }) => {
                       id="outlined-required"
                       label="Required"
                       onChange={handleChange}
-                      value={values.firstName}
+                      value={values.merk}
                     />
                   </div>
                   <div>
@@ -101,7 +107,7 @@ export const AutoAddDialog = ({ open, handleClose,transition }) => {
                       id="outlined-required"
                       label="Required"
                       onChange={handleChange}
-                      value={values.firstName}
+                      value={values.plateNumber}
                     />
                   </div>
 

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { autoApi } from "../../utilities/autoApi";
-export const fetchAutos=createAsyncThunk('autos',
+export const fetchAutos=createAsyncThunk(
+    'autos',
     async()=>{
         let response;
         try {
@@ -32,5 +33,22 @@ export const addAuto=createAsyncThunk(
             throw Err;
         }
         return response.data;
+    }
+)
+export const deleteAuto=createAsyncThunk(
+    'deleteAuto',
+    async(autoId)=>{
+        let response;
+        try {
+            response = await autoApi.delete(`${autoId}`);
+        } catch (error) {
+            console.log(error)
+            let Err={
+                message:'error',
+                isSuccess:false
+            }
+            throw Err;
+        }
+        return {...response.data,autoId};
     }
 )
