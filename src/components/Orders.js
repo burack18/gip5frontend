@@ -65,7 +65,7 @@ const deleteAutoById=(autoId)=>{
   return (
     <React.Fragment>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Title>Recent Orders</Title>
+        <Title>List of Autos</Title>
         <IconButton variant='contained' color='success' onClick={()=>popUpAddAutoOpen('addmode')} ><AddIcon /> AddAuto</IconButton>
       </div>
       {
@@ -77,6 +77,7 @@ const deleteAutoById=(autoId)=>{
                 <TableCell>Merk</TableCell>
                 <TableCell>Model</TableCell>
                 <TableCell>Plate Number</TableCell>
+                <TableCell>Construction Year</TableCell>
               </TableRow>
             </TableHead>
             <TableBody >
@@ -86,13 +87,14 @@ const deleteAutoById=(autoId)=>{
                   <TableCell>{auto.merk}</TableCell>
                   <TableCell>{auto.model}</TableCell>
                   <TableCell>{auto.plateNumber}</TableCell>           
+                  <TableCell>year</TableCell>
                     <Button variant='contained' style={{float:'right' ,marginLeft:'10px'}} color='error' title='Delete' startIcon={<DeleteIcon />} onClick={() => deleteAutoById(auto.autoId)}>Delete</Button>    
                     <Button variant='contained' style={{float:'right'}} color='secondary' title='Edit' startIcon={<Edit />} onClick={() => popUpAddAutoOpen('editMode',auto)} >Edit</Button> 
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          : <CircularProgress />
+          : <CircularProgress className='circular' />
       }
       <Link color="primary" href="#" onClick={preventDefault} sx={{ mt: 3 }}>
         See more orders

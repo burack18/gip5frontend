@@ -16,6 +16,7 @@ import PrivateRoute from './utilities/PrivateRoute';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { MainPage } from './pages/MainPage';
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -38,10 +39,10 @@ function App() {
         <Routes>
           <Route path="/" element={<PrivateRoute />}>
             <Route path='dashboard' element={<Dashboard />} />
+            <Route path="/" element={<MainPage />}/>
           </Route>
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
-
         </Routes>
       </BrowserRouter>
       <ToastContainer />

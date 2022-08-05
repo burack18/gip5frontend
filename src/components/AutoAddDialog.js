@@ -22,7 +22,7 @@ import { useNavigate } from 'react-router-dom';
 export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
  const dispatch=useDispatch();
  const navigate=useNavigate(); 
- console.log(autoInitval)
+
   return (
     <div>
       <Dialog
@@ -45,7 +45,7 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
               Brand Trucker
             </Typography>
             <Button autoFocus color="inherit" onClick={handleClose}>
-              save
+              Close
             </Button>
           </Toolbar>
         </AppBar>
@@ -70,12 +70,11 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
           >
             {({ handleChange, values, handleSubmit }) => (
               <div>
-                <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                  AutoAdd Form
+                <Typography sx={{ ml: 2, flex: 1 ,marginTop:5}} variant="h6" component="div">
+                 {autoInitval.autoId?'Auto Edit Form':'Auto Add Form'} 
                 </Typography>
                 <Form style={{ marginTop: '5%' }}>
                   <div>
-
                     <InputLabel >Model</InputLabel>
                     <TextField
                       name='model'

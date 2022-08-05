@@ -45,8 +45,22 @@ export const userSlice=createSlice({
             state.isLoaded=true
             state.data={}
             toaster('error',action.error.message)
-        });
-        
+        })
+        builder.addCase(registerUser.pending,(state,action)=>{
+            state.isLoaded=false
+            state.error=''
+            state.data={}
+        })
+        .addCase(registerUser.fulfilled,(state,action)=>{
+            state.isLoaded=true
+            toaster('success',action.payload.data.message)
+       })
+        .addCase(registerUser.rejected,(state,action)=>{
+            state.error=action.error.message
+            state.isLoaded=true
+            state.data={}
+            toaster('error',action.error.message)
+        })        
     }
 })
 
@@ -70,5 +84,23 @@ export const loginUser=createAsyncThunk(
      }
 )
 
+export const registerUser=createAsyncThunk(
+    'registerUser',
+    async(credentials)=>{
+       let response;
+       try {
+           response=await axios.post(`${process.env.REACT_APP_BASEURL}/auth/register`,credentials);  
+       } catch (error) {
+           console.log(error)
+           const customError = {
+               name: "Logout Error",
+               message: error.response.data.message,
+               data: error.response.data 
+             };
+             throw customError;           
+       }
+       return response
+    }
+)
 export const {logout}=userSlice.actions;
 export default userSlice.reducer;

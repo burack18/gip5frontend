@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/index'
 import {persistor} from './store/index'
 import { PersistGate } from 'redux-persist/integration/react';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -19,7 +20,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            <Suspense fallback={<h2>asd</h2>}>
+            <Suspense fallback={<CircularProgress  className='circular'/>}>
             <App />
             </Suspense>
         </PersistGate>  
