@@ -17,6 +17,7 @@ import PrivateRoute from './utilities/PrivateRoute';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MainPage } from './pages/MainPage';
+import { AutoDetails } from './components/AutoDetails';
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -38,7 +39,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/dashboard" element={<PrivateRoute />}>
-            <Route path='/dashboard' element={<Dashboard />} />        
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/dashboard/:autoId/details' element={<AutoDetails />} />        
           </Route>
           <Route path="/" element={<MainPage />}/>
           <Route path='login' element={<Login />} />

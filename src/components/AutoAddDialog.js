@@ -56,14 +56,15 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
               merk: autoInitval?.merk||'',
               model: autoInitval?.model||'',
               plateNumber: autoInitval?.plateNumber||'',
+              yearOfConstruction:autoInitval?.yearOfConstruction||'',
+              tankVolume:autoInitval?.tankVolume||''
             }}
             onSubmit={(values) => {
               if(autoInitval?.autoId!==undefined)
               dispatch(updateAuto({autoId:autoInitval.autoId,...values})).unwrap().then(x=>handleClose())
               else{
                 dispatch(addAuto(values)).unwrap().then(x=>handleClose())
-              }
-              
+              }             
             }}
 
 
@@ -109,7 +110,31 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
                       value={values.plateNumber}
                     />
                   </div>
+                  <div>
 
+                    <InputLabel >Construction Year</InputLabel>
+                    <TextField
+                      name='yearOfConstruction'
+                      required
+                      id="outlined-required"
+                      label="Required"
+                      onChange={handleChange}
+                      value={values.yearOfConstruction}
+                    />
+                  </div>
+                  <div>
+
+                    <InputLabel >Tank volume</InputLabel>
+                    <TextField
+                      name='tankVolume'
+                      required
+                      id="outlined-required"
+                      label="Required"
+                      onChange={handleChange}
+                      value={values.tankVolume}
+                    />
+                  </div>
+               
                   <Button onClick={handleSubmit} size='large' style={{ marginTop: '10px' }} variant="outlined" startIcon={<SaveIcon />}>
                     Save
                   </Button>
