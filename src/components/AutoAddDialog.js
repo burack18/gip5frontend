@@ -14,7 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Box, Container, FormControl, Input, InputLabel, TextField } from '@mui/material';
 import { Formik, Field, Form } from 'formik';
 import { Label } from 'recharts';
-import { addAuto } from '../features/auto/autosAsyncThunk';
+import { addAuto, updateAuto } from '../features/auto/autosAsyncThunk';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { useNavigate } from 'react-router-dom';
 
@@ -59,11 +59,11 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
             }}
             onSubmit={(values) => {
               if(autoInitval?.autoId!==undefined)
-              console.log('edit')
+              dispatch(updateAuto({autoId:autoInitval.autoId,...values})).unwrap().then(x=>handleClose())
               else{
-              console.log('add')
+                dispatch(addAuto(values)).unwrap().then(x=>handleClose())
               }
-            //  dispatch(addAuto(values)).unwrap().then(x=>handleClose())
+              
             }}
 
 

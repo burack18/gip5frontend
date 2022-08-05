@@ -9,11 +9,11 @@ function PrivateRoute({ children, ...rest }) {
    console.log(user)
   const navigate=useNavigate();
   if(user.data.username===undefined){
-    navigate("login")
+    navigate("/login")
   }
   useEffect(() => {
     if(user.data.username===undefined)
-      navigate("login")
+      navigate("/login")
   }, [])
    return <Outlet/>       
 }

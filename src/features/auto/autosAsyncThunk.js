@@ -52,3 +52,20 @@ export const deleteAuto=createAsyncThunk(
         return {...response.data,autoId};
     }
 )
+export const updateAuto=createAsyncThunk(
+    'updateAuto',
+    async(auto)=>{
+        let response;
+        try {
+            response = await autoApi.put(`${auto.autoId}`,auto);
+        } catch (error) {
+            console.log(error)
+            let Err={
+                message:'error',
+                isSuccess:false
+            }
+            throw Err;
+        }
+        return response.data;
+    }
+)

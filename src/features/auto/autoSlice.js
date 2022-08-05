@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { toaster } from "../../utilities/toaster"
-import { addAuto, deleteAuto, fetchAutos } from "./autosAsyncThunk"
+import { addAuto, deleteAuto, fetchAutos, updateAuto } from "./autosAsyncThunk"
 
 const initialState={
     data:[],
@@ -51,6 +51,19 @@ const autosSlice=createSlice({
             state.isLoaded=true;
             toaster('error',action.payload.message)
         }) 
+        .addCase(updateAuto.pending,(state,action)=>{
+            state.isLoaded=false;
+        })
+        .addCase(updateAuto.fulfilled,(state,action)=>{
+            state.isLoaded=true;
+            var modifiedAutoIndex=state.data.findIndex(x=>x.autoId===action.payload.data.autoId);
+            state.data.splice(modifiedAutoIndex,1,action.payload.data)              
+            toaster('success',action.payload.message)
+        })
+        .addCase(updateAuto.rejected,(state,action)=>{
+            state.isLoaded=true;
+            toaster('error',action.payload.message)
+        })
     }
 })
 

@@ -37,10 +37,10 @@ function App() {
 
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path='dashboard' element={<Dashboard />} />
-            <Route path="/" element={<MainPage />}/>
+          <Route path="/dashboard" element={<PrivateRoute />}>
+            <Route path='/dashboard' element={<Dashboard />} />        
           </Route>
+          <Route path="/" element={<MainPage />}/>
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
         </Routes>
