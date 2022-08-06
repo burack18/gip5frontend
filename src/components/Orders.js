@@ -15,11 +15,14 @@ import Slide from '@mui/material/Slide';
 import { deleteAuto, fetchAutos } from '../features/auto/autosAsyncThunk';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import LocalGasStationOutlinedIcon from '@mui/icons-material/LocalGasStationOutlined';
 import { useNavigate } from 'react-router-dom';
+import { BrandStofDialog } from './BrandStofDialog';
 
 
 export default function Orders({ transition }) {
   const [open, setOpen] = React.useState(false);
+  const [isBrandStofDialogOpen, setIsBrandStofDialogOpen] = React.useState(false);
   const [autoInitval, setAutoInitval] = React.useState({})
   const dispatch = useDispatch();
   const autos = useSelector(state => state.autos);
@@ -30,6 +33,13 @@ export default function Orders({ transition }) {
     dispatch(fetchAutos())
   }, [])
 
+  const dialogClose=()=>{
+    setIsBrandStofDialogOpen(false)
+  }
+  
+  const dialogOpen=()=>{
+    setIsBrandStofDialogOpen(true)
+  }
 
   function preventDefault(event) {
     event.preventDefault();
@@ -61,26 +71,29 @@ export default function Orders({ transition }) {
           <Table size="medium" >
             <TableHead>
               <TableRow>
-                <TableCell>Auto Id</TableCell>
+          
                 <TableCell>Merk</TableCell>
                 <TableCell>Model</TableCell>
                 <TableCell>Plate Number</TableCell>
                 <TableCell>Construction Year</TableCell>
                 <TableCell>Tank Volume</TableCell>
+                <TableCell>Brandstof</TableCell>
               </TableRow>
             </TableHead>
             <TableBody >
               {autos.data.slice((pageNumber-1)*5,pageNumber*5).map((auto) => (
                 <TableRow key={auto.autoId}>
-                  <TableCell>{auto.autoId}</TableCell>
+       
                   <TableCell>{auto.merk}</TableCell>
                   <TableCell>{auto.model}</TableCell>
                   <TableCell>{auto.plateNumber}</TableCell>
                   <TableCell>{auto.yearOfConstruction}</TableCell>
                   <TableCell>{auto.tankVolume}</TableCell>
-                  <Button variant='contained' style={{ float: 'right', marginLeft: '10px' }} color='error' title='Delete' startIcon={<DeleteIcon />} onClick={() => deleteAutoById(auto.autoId)}>Delete</Button>
-                  <Button variant='contained' style={{ float: 'right' , marginLeft: '10px' }} color='secondary' title='Edit' startIcon={<Edit />} onClick={() => popUpAddAutoOpen('editMode', auto)} >Edit</Button>
-                  <Button variant='contained' style={{ float: 'right' }} color='info' startIcon={<InfoOutlinedIcon />}  title='Edit' onClick={() => navigate(`${auto.autoId}/details`)} >View details</Button>
+                  <TableCell>{auto.availableBrandStof}</TableCell>
+                  <Button variant='contained' size='small' style={{ float: 'right', marginLeft: '10px'  }} color='error' title='Delete' startIcon={<DeleteIcon />} onClick={() => deleteAutoById(auto.autoId)}>Delete</Button>
+                  <Button variant='contained' size='small' style={{ float: 'right' , marginLeft: '10px' }} color='secondary' title='Edit' startIcon={<Edit />} onClick={() => popUpAddAutoOpen('editMode', auto)} >Edit</Button>
+                  <Button variant='contained' size='small' style={{ float: 'right', marginLeft: '10px'  }} color='info' startIcon={<InfoOutlinedIcon />}  title='Edit' onClick={() => navigate(`${auto.autoId}/details`)} >Details</Button>
+                  <Button variant='contained' size='small' style={{ float: 'right' }} color='warning' startIcon={<LocalGasStationOutlinedIcon />}  title='Edit' onClick={() => dialogOpen()} >Brandstof</Button>
                 </TableRow>
               ))}
             </TableBody>
@@ -89,6 +102,7 @@ export default function Orders({ transition }) {
       }
         <Pagination count={5} onChange={(event,page)=>setPageNumber(page)} color="primary" sx={{marginTop:'5px'}} />
       <AutoAddDialog autoInitval={autoInitval} open={open} transition={transition} handleClose={handleClose} />
+      <BrandStofDialog open={isBrandStofDialogOpen} dialogClose={dialogClose} />
     </React.Fragment>
   );
 }
