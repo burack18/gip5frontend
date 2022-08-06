@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
-import { Button, CircularProgress, IconButton, Pagination, Stack } from '@mui/material';
+import { Button, CircularProgress, createTheme, IconButton, Pagination, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Edit } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
@@ -18,9 +18,10 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import LocalGasStationOutlinedIcon from '@mui/icons-material/LocalGasStationOutlined';
 import { useNavigate } from 'react-router-dom';
 import { BrandStofDialog } from './BrandStofDialog';
+import { ThemeProvider } from 'styled-components';
 
 
-export default function Orders({ transition }) {
+export default function AutoTable({ transition }) {
   const [open, setOpen] = React.useState(false);
   const [isBrandStofDialogOpen, setIsBrandStofDialogOpen] = React.useState(false);
   const [autoInitval, setAutoInitval] = React.useState({})
@@ -34,10 +35,12 @@ export default function Orders({ transition }) {
   }, [])
 
   const dialogClose=()=>{
+    setAutoInitval({})
     setIsBrandStofDialogOpen(false)
   }
   
-  const dialogOpen=()=>{
+  const dialogOpen=(auto)=>{
+    setAutoInitval(auto)
     setIsBrandStofDialogOpen(true)
   }
 
@@ -59,7 +62,7 @@ export default function Orders({ transition }) {
   const deleteAutoById = (autoId) => {
     dispatch(deleteAuto(autoId))
   }
-
+  const mdTheme=createTheme();
   return (
     <React.Fragment>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -90,10 +93,12 @@ export default function Orders({ transition }) {
                   <TableCell>{auto.yearOfConstruction}</TableCell>
                   <TableCell>{auto.tankVolume}</TableCell>
                   <TableCell>{auto.availableBrandStof}</TableCell>
+                  <td>
                   <Button variant='contained' size='small' style={{ float: 'right', marginLeft: '10px'  }} color='error' title='Delete' startIcon={<DeleteIcon />} onClick={() => deleteAutoById(auto.autoId)}>Delete</Button>
                   <Button variant='contained' size='small' style={{ float: 'right' , marginLeft: '10px' }} color='secondary' title='Edit' startIcon={<Edit />} onClick={() => popUpAddAutoOpen('editMode', auto)} >Edit</Button>
-                  <Button variant='contained' size='small' style={{ float: 'right', marginLeft: '10px'  }} color='info' startIcon={<InfoOutlinedIcon />}  title='Edit' onClick={() => navigate(`${auto.autoId}/details`)} >Details</Button>
-                  <Button variant='contained' size='small' style={{ float: 'right' }} color='warning' startIcon={<LocalGasStationOutlinedIcon />}  title='Edit' onClick={() => dialogOpen()} >Brandstof</Button>
+                  <Button variant='contained' size='small' style={{ float: 'right', marginLeft: '10px'  }} color='info' startIcon={<InfoOutlinedIcon />}  title='Details' onClick={() => navigate(`${auto.autoId}/details`)} >Details</Button>
+                  <Button variant='contained' size='small' style={{ float: 'right' }} color='warning' startIcon={<LocalGasStationOutlinedIcon />}  title='Brandstof' onClick={() => dialogOpen(auto)} >Brandstof</Button>
+                  </td>
                 </TableRow>
               ))}
             </TableBody>
@@ -102,7 +107,9 @@ export default function Orders({ transition }) {
       }
         <Pagination count={5} onChange={(event,page)=>setPageNumber(page)} color="primary" sx={{marginTop:'5px'}} />
       <AutoAddDialog autoInitval={autoInitval} open={open} transition={transition} handleClose={handleClose} />
-      <BrandStofDialog open={isBrandStofDialogOpen} dialogClose={dialogClose} />
+      <ThemeProvider theme={mdTheme}>
+      <BrandStofDialog open={isBrandStofDialogOpen} dialogClose={dialogClose} auto={autoInitval}/>
+      </ThemeProvider>
     </React.Fragment>
   );
 }

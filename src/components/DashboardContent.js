@@ -21,7 +21,6 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Deposits from './Deposits';
-import Orders from './Orders';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Button, Tooltip } from '@mui/material';
@@ -30,6 +29,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
 import Slide from '@mui/material/Slide';
 import { fetchAutos } from '../features/auto/autosAsyncThunk';
+import AutoTable from './AutoTable'
 
 function Copyright(props) {
   return (
@@ -118,12 +118,12 @@ function DashboardContent() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
+  
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = (setting) => {
@@ -141,7 +141,6 @@ function DashboardContent() {
   }
   const pages = ['Products', 'Pricing', 'Blog'];
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -272,7 +271,7 @@ function DashboardContent() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders  transition={Transition}/>
+                  <AutoTable  transition={Transition}/>
                 </Paper>
               </Grid>
             </Grid>
