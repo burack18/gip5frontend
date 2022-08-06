@@ -6,7 +6,7 @@ import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
-import { Button, CircularProgress, createTheme, IconButton, Pagination, Stack } from '@mui/material';
+import { Button, CircularProgress, createTheme, Fab, IconButton, Pagination, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Edit } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
@@ -28,18 +28,18 @@ export default function AutoTable({ transition }) {
   const dispatch = useDispatch();
   const autos = useSelector(state => state.autos);
   const [pageNumber, setPageNumber] = React.useState(1);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(fetchAutos())
   }, [])
 
-  const dialogClose=()=>{
+  const dialogClose = () => {
     setAutoInitval({})
     setIsBrandStofDialogOpen(false)
   }
-  
-  const dialogOpen=(auto)=>{
+
+  const dialogOpen = (auto) => {
     setAutoInitval(auto)
     setIsBrandStofDialogOpen(true)
   }
@@ -62,7 +62,7 @@ export default function AutoTable({ transition }) {
   const deleteAutoById = (autoId) => {
     dispatch(deleteAuto(autoId))
   }
-  const mdTheme=createTheme();
+  const mdTheme = createTheme();
   return (
     <React.Fragment>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -74,7 +74,7 @@ export default function AutoTable({ transition }) {
           <Table size="medium" >
             <TableHead>
               <TableRow>
-          
+
                 <TableCell>Merk</TableCell>
                 <TableCell>Model</TableCell>
                 <TableCell>Plate Number</TableCell>
@@ -84,20 +84,20 @@ export default function AutoTable({ transition }) {
               </TableRow>
             </TableHead>
             <TableBody >
-              {autos.data.slice((pageNumber-1)*5,pageNumber*5).map((auto) => (
+              {autos.data.slice((pageNumber - 1) * 5, pageNumber * 5).map((auto) => (
                 <TableRow key={auto.autoId}>
-       
+
                   <TableCell>{auto.merk}</TableCell>
                   <TableCell>{auto.model}</TableCell>
                   <TableCell>{auto.plateNumber}</TableCell>
                   <TableCell>{auto.yearOfConstruction}</TableCell>
                   <TableCell>{auto.tankVolume}</TableCell>
                   <TableCell>{auto.availableBrandStof}</TableCell>
-                  <td>
-                  <Button variant='contained' size='small' style={{ float: 'right', marginLeft: '10px'  }} color='error' title='Delete' startIcon={<DeleteIcon />} onClick={() => deleteAutoById(auto.autoId)}>Delete</Button>
-                  <Button variant='contained' size='small' style={{ float: 'right' , marginLeft: '10px' }} color='secondary' title='Edit' startIcon={<Edit />} onClick={() => popUpAddAutoOpen('editMode', auto)} >Edit</Button>
-                  <Button variant='contained' size='small' style={{ float: 'right', marginLeft: '10px'  }} color='info' startIcon={<InfoOutlinedIcon />}  title='Details' onClick={() => navigate(`${auto.autoId}/details`)} >Details</Button>
-                  <Button variant='contained' size='small' style={{ float: 'right' }} color='warning' startIcon={<LocalGasStationOutlinedIcon />}  title='Brandstof' onClick={() => dialogOpen(auto)} >Brandstof</Button>
+                  <td>            
+                    <Fab variant='contained' size='small' style={{ float: 'right', marginLeft: '5px' }} color='error' title='Delete'  onClick={() => deleteAutoById(auto.autoId)}><DeleteIcon /></Fab>
+                    <Fab variant='contained' size='small' style={{ float: 'right', marginLeft: '5px' }} color='secondary' title='Edit' onClick={() => popUpAddAutoOpen('editMode', auto)} ><Edit /></Fab>
+                    <Fab variant='contained' size='small' style={{ float: 'right', marginLeft: '5px' }} color='info'  title='Details' onClick={() => navigate(`${auto.autoId}/details`)} ><InfoOutlinedIcon /></Fab>
+                    <Fab variant='contained' size='small' style={{ float: 'right', marginLeft: '5px' }} color='warning'  title='Brandstof' onClick={() => dialogOpen(auto)} ><LocalGasStationOutlinedIcon /></Fab>
                   </td>
                 </TableRow>
               ))}
@@ -105,10 +105,10 @@ export default function AutoTable({ transition }) {
           </Table>
           : <CircularProgress className='circular' />
       }
-        <Pagination count={5} onChange={(event,page)=>setPageNumber(page)} color="primary" sx={{marginTop:'5px'}} />
+      <Pagination count={5} onChange={(event, page) => setPageNumber(page)} color="primary" sx={{ marginTop: '5px' }} />
       <AutoAddDialog autoInitval={autoInitval} open={open} transition={transition} handleClose={handleClose} />
       <ThemeProvider theme={mdTheme}>
-      <BrandStofDialog open={isBrandStofDialogOpen} dialogClose={dialogClose} auto={autoInitval}/>
+        <BrandStofDialog open={isBrandStofDialogOpen} dialogClose={dialogClose} auto={autoInitval} />
       </ThemeProvider>
     </React.Fragment>
   );

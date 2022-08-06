@@ -17,7 +17,9 @@ import PrivateRoute from './utilities/PrivateRoute';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MainPage } from './pages/MainPage';
-import { AutoDetails } from './components/AutoDetails';
+import { AutoUsageAdd } from './components/AutoUsageAdd';
+import React from 'react';
+import { AutoDetailsPage } from './components/AutoDetailsPage';
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -32,17 +34,18 @@ i18n
 
 function App() {
   const { t } = useTranslation();
+ 
 
   return (
     <div>
-
       <BrowserRouter>
-        <Routes>
+        <Routes>          
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path='/dashboard' element={<Dashboard />} />
-            <Route path='/dashboard/:autoId/details' element={<AutoDetails />} />        
+            <Route path='/dashboard/:autoId/details' element={<AutoDetailsPage />} />       
           </Route>
           <Route path="/" element={<MainPage />}/>
+          <Route path="/auto-usage" element={<AutoUsageAdd />}/>
           <Route path='login' element={<Login />} />
           <Route path='register' element={<Register />} />
         </Routes>

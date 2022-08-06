@@ -23,13 +23,22 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Deposits from './Deposits';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Button, Tooltip } from '@mui/material';
+import { Button, ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useDispatch,useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
 import Slide from '@mui/material/Slide';
 import { fetchAutos } from '../features/auto/autosAsyncThunk';
 import AutoTable from './AutoTable'
+import ListItemText from '@mui/material/ListItemText';
+import ListSubheader from '@mui/material/ListSubheader';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PeopleIcon from '@mui/icons-material/People';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import LayersIcon from '@mui/icons-material/Layers';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import AddIcon from '@mui/icons-material/Add';
 
 function Copyright(props) {
   return (
@@ -103,8 +112,8 @@ function DashboardContent() {
   const user = useSelector(state => state.user);
   const [open, setOpen] = React.useState(true);
 
- 
-  
+
+
 
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -118,7 +127,7 @@ function DashboardContent() {
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
-  
+
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
@@ -218,13 +227,41 @@ function DashboardContent() {
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
             </IconButton>
-
           </Toolbar>
           <Divider />
-          <List component="nav">
-            {mainListItems}
+          <List component="nav" onClick={(e) => console.log(e)}>
+            <ListItemButton>
+              <ListItemIcon>
+                <DashboardIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Orders" />
+            </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Customers" />
+            </ListItemButton>
+            <ListItemButton>
+              <ListItemIcon>
+                <BarChartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Reports" />
+            </ListItemButton>
+            <ListItemButton onClick={()=>navigate('/auto-usage')}>
+              <ListItemIcon>
+                <AddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Auto Usage Add" />
+            </ListItemButton>
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            Buraya 2.list gelicek
           </List>
         </Drawer>
         <Box
@@ -271,7 +308,7 @@ function DashboardContent() {
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <AutoTable  transition={Transition}/>
+                  <AutoTable transition={Transition} />
                 </Paper>
               </Grid>
             </Grid>
