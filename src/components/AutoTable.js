@@ -31,7 +31,7 @@ export default function AutoTable({ transition }) {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    dispatch(fetchAutos())
+    dispatch(fetchAutos()).unwrap().then(x=>console.log('anaekran'))
   }, [])
 
   const dialogClose = () => {
@@ -84,8 +84,8 @@ export default function AutoTable({ transition }) {
               </TableRow>
             </TableHead>
             <TableBody >
-              {autos.data.slice((pageNumber - 1) * 5, pageNumber * 5).map((auto) => (
-                <TableRow key={auto.autoId}>
+              {autos.data.slice((pageNumber - 1) * 5, pageNumber * 5).map((auto,index) => (
+                <TableRow key={index}>
 
                   <TableCell>{auto.merk}</TableCell>
                   <TableCell>{auto.model}</TableCell>

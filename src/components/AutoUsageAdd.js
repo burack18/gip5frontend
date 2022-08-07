@@ -328,7 +328,7 @@ export const AutoUsageAdd = () => {
                               value={values.auto}
                               defaultValue={0}                      
                             >
-                              {autos.data.map((auto, index) => <MenuItem key={index} value={auto.autoId}>{auto.merk}</MenuItem>)}
+                              {autos.data.map((auto, index) => <MenuItem key={auto.autoId} value={auto.autoId}>{auto.plateNumber}</MenuItem>)}
 
                             </Select>
                           </FormControl>

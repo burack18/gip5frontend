@@ -2,6 +2,9 @@ import * as React from 'react';
 import { useTheme } from '@mui/material/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Title from './Title';
+import axios from 'axios';
+import { toaster } from '../utilities/toaster';
+import { useSelector } from 'react-redux';
 
 // Generate Sales Data
 function createData(time, amount) {
@@ -9,19 +12,36 @@ function createData(time, amount) {
 }
 
 const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 12000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00', undefined),
+  {month:'agustus',price: 0},
+  {month:'mart',price: 5}
 ];
 
 export default function Chart() {
   const theme = useTheme();
+  const [data, setData] = React.useState([])
+  const [isLoaded, setIsLoaded] = React.useState(true)
+  const autos=useSelector(state=>state.autos);
+
+  React.useEffect(() => {
+    getData()
+  }, [autos])
+  
+
+  const getData= async()=>{
+    setIsLoaded(false)
+    try {
+      const token=localStorage.getItem('token')
+      const response=await axios.get(`${process.env.REACT_APP_BASEURL}/brandstofs/months`,{
+        headers:{
+          'Authorization':token
+        }
+      })
+      setData(response.data.data)
+    } catch (error) {
+      toaster('error',error.message)
+    }    
+    setIsLoaded(true)
+  }
 
   return (
     <React.Fragment>
@@ -37,7 +57,7 @@ export default function Chart() {
           }}
         >
           <XAxis
-            dataKey="time"
+            dataKey="month"
             stroke={theme.palette.text.secondary}
             style={theme.typography.body2}
           />
@@ -58,9 +78,9 @@ export default function Chart() {
             </Label>
           </YAxis>
           <Line
-            isAnimationActive={false}
+            isAnimationActive={true}
             type="monotone"
-            dataKey="amount"
+            dataKey="price"
             stroke={theme.palette.primary.main}
             dot={false}
           />

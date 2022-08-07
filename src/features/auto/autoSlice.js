@@ -69,13 +69,13 @@ const autosSlice=createSlice({
         })
         .addCase(addBrandStof.fulfilled,(state,action)=>{
             state.isLoaded=true;
-            console.log(action)
             var modifiedAutoIndex=state.data.find(x=>x.autoId===action.payload.autoId);
             let brandstof;
             if(modifiedAutoIndex.availableBrandStof){
                 brandstof=action.payload.data.brandStofAmount+modifiedAutoIndex.availableBrandStof;
-            }
-            state.data.splice(modifiedAutoIndex,1,{...modifiedAutoIndex,availableBrandStof:brandstof})                        
+            } 
+            var index=state.data.indexOf(x=>x.autoId===modifiedAutoIndex.autoId)                 
+            state.data.splice(index,1,{...modifiedAutoIndex,availableBrandStof:(brandstof||action.payload.data.brandStofAmount)})   
             toaster('success',action.payload.message)
         })
         .addCase(addBrandStof.rejected,(state,action)=>{

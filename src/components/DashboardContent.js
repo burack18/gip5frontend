@@ -113,7 +113,7 @@ function DashboardContent() {
   const [open, setOpen] = React.useState(true);
 
 
-
+  const [count, setcount] = React.useState(0)
 
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -311,7 +311,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart />
+                  <Chart count={count} />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -337,9 +337,7 @@ function DashboardContent() {
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
-      </Box>
-
-
+      </Box>           
     </ThemeProvider>
   );
 }
