@@ -23,7 +23,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Deposits from './Deposits';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Button, ListItemButton, ListItemIcon, Select, Tooltip } from '@mui/material';
+import { Button, FilledInput, InputAdornment, ListItemButton, ListItemIcon, Select, Tooltip } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
@@ -44,6 +44,12 @@ import SaveIcon from '@mui/icons-material/Save';
 import { FormControl, Input, InputLabel, TextField } from '@mui/material';
 import { Formik, Field, Form } from 'formik';
 import { Label } from 'recharts';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import moment from 'moment';
+import { autoApi } from '../utilities/autoApi';
+import { toaster } from '../utilities/toaster';
 
 function Copyright(props) {
   return (
@@ -286,15 +292,23 @@ export const AutoUsageAdd = () => {
           <Container>
             <Formik
               initialValues={{
-                distance: "",
+                distance: 0,
                 brandStofVerbruik: '',
-                date: ''
+                date: moment(),
+                auto:0
               }}
-              onSubmit={(values) => {
-                console.log(values)
+              onSubmit={async(values) => {
+                try {
+                  const response=await autoApi.post(`${values.auto}/auto-usages`,values);
+                  toaster('success',response.data.message)
+                  navigate('/dashboard')
+                } catch (error) {
+                  console.log(error)
+                  toaster('error',error.response.data.message)             
+                }
               }}
             >
-              {({ handleChange, values, handleSubmit }) => (
+              {({ handleChange,setFieldValue, values, handleSubmit }) => (
                 <div>
                   <Container>
                     <Typography sx={{ ml: 2, flex: 1, marginTop: 5 }} variant="h6" component="div">
@@ -305,16 +319,15 @@ export const AutoUsageAdd = () => {
                       <Grid container spacing={2}>
                         <Grid item xs={3}>
                           <FormControl fullWidth>
-                          
-                            <Select
-                              name='distance'
+                            <InputLabel>asd</InputLabel>
+                            <Select                             
+                              name='auto'
                               required
                               id="outlined-required"
                               onChange={handleChange}
-                              value={values.distance}
-                              defaultValue=""
+                              value={values.auto}
+                              defaultValue={0}                      
                             >
-
                               {autos.data.map((auto, index) => <MenuItem key={index} value={auto.autoId}>{auto.merk}</MenuItem>)}
 
                             </Select>
@@ -327,7 +340,9 @@ export const AutoUsageAdd = () => {
                               name='distance'
                               id="outlined-number"
                               label="Number"
-                              type="number"                          
+                              type="number"
+                              endAdornment='km'
+                              onChange={(e)=>setFieldValue('distance',e.target.value)}
                             />
                           </FormControl>
                         </Grid>
@@ -336,25 +351,30 @@ export const AutoUsageAdd = () => {
                         <Grid item xs={3}>
                           <FormControl fullWidth>
                             <InputLabel >Brand Verbruik</InputLabel>
-                            <TextField
+                            <FilledInput
                               name='brandStofVerbruik'
                               required
                               id="outlined-required"
                               onChange={handleChange}
                               value={values.brandStofVerbruik}
+                              endAdornment={<InputAdornment position="end">Liter</InputAdornment>}
                             />
                           </FormControl>
                         </Grid>
                         <Grid item xs={3}>
                           <FormControl fullWidth>
-                            <InputLabel >Date</InputLabel>
-                            <TextField
-                              name='date'
-                              required
-                              id="outlined-required"
-                              onChange={handleChange}
+                            
+                            <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <DatePicker
+                              label="Helper text example"
                               value={values.date}
+                              name='date'
+                              onChange={(e)=>setFieldValue('date',moment(e))}
+                              renderInput={(params) => (
+                                <TextField {...params} helperText={params?.inputProps?.placeholder} />
+                              )}
                             />
+                            </LocalizationProvider>
                           </FormControl>
                         </Grid>
                       </Grid>

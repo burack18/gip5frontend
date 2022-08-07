@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components';
 import { autoApi } from '../utilities/autoApi';
 import { Item } from './Item';
+import moment from 'moment';
+import { toaster } from '../utilities/toaster';
 
 export const AutoDetails = () => {
 
@@ -24,14 +26,24 @@ export const AutoDetails = () => {
 
   const getBrandStofs = async () => {
     setIsLoaded(false)
-    const response = await autoApi.get(`${autoId}/brandstofs`);
-    setBrandStofs(response.data.data)
+    try {
+      const response = await autoApi.get(`${autoId}/brandstofs`);
+      setBrandStofs(response.data.data)
+      toaster('success',response.data.message)
+    } catch (error) {
+      toaster('error',error.response.data.message)
+    }
     setIsLoaded(true)
   }
   const getAutoUsages=async()=>{
     setIsLoadedAutoUsage(false)
-    const response=await autoApi.get(`${autoId}/auto-usages`);
-    setAutoUsages(response.data.data)
+    try {
+      const response=await autoApi.get(`${autoId}/auto-usages`);
+      setAutoUsages(response.data.data)   
+      toaster('success',response.data.message)
+    } catch (error) {
+      toaster('error',error.response.data.message)
+    }
     setIsLoadedAutoUsage(true)
   }
 
@@ -63,13 +75,12 @@ export const AutoDetails = () => {
                   <Item>
                     <p>brandStofAmount : {brandstof.brandStofAmount}</p>
                     <p>price : {brandstof.price}</p>
-                    <p>refuelingDate : {brandstof.refuelingDate}</p>
+                    <p>refuelingDate : {moment(brandstof.refuelingDate).format('YYYY-MM-DD HH:mm:ss')}</p>
                   </Item>
                   <br/>
                   </div>
                 ))
               }
-
             </Grid>
           </Grid>
         </ThemeProvider>
