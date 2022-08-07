@@ -81,14 +81,15 @@ export const AutoDetails = () => {
         <ThemeProvider theme={mdTheme}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-            {!isLoadedTotalAutousage ? <CircularProgress className='circular' /> :
+            {!isLoadedTotalAutousage? <CircularProgress className='circular' /> :
+              totalAutoUsage?
                 <Item>
                   <h3>Total AutoUsage</h3>
-                  <p>plateNumber :{totalAutoUsage.plateNumber}</p>
-                  <p>Total distance:{totalAutoUsage.totalDistance}</p>
-                  <p>Count of Usage:{totalAutoUsage.countOfUsage}</p>
-                  <p>Total brandstofverbruik:{totalAutoUsage.brandStofVerbruik} $</p>
-                </Item>
+                  <p>plateNumber :{totalAutoUsage?.plateNumber}</p>
+                  <p>Total distance:{totalAutoUsage?.totalDistance}</p>
+                  <p>Count of Usage:{totalAutoUsage?.countOfUsage}</p>
+                  <p>Total brandstofverbruik:{totalAutoUsage?.brandStofVerbruik} $</p>
+                </Item>:<Item>No Data</Item>
               }
               <h2>Recent Auto Usages</h2>
               {!isLoadedAutoUsage ? <CircularProgress className='circular' /> :
@@ -107,12 +108,13 @@ export const AutoDetails = () => {
             </Grid>
             <Grid item xs={6}>
               {!isLoadedTotalCost ? <CircularProgress className='circular' /> :
+                totalBrandCost?
                 <Item>
                   <h3>Total BrandCost</h3>
-                  <p>Plate number:{totalBrandCost.plateNumber}</p>
-                  <p>Count of Refueling:{totalBrandCost.countOfRefueling}</p>
-                  <p>totalCost:{totalBrandCost.totalCost} $</p>
-                </Item>
+                  <p>Plate number:{totalBrandCost?.plateNumber}</p>
+                  <p>Count of Refueling:{totalBrandCost?.countOfRefueling}</p>
+                  <p>totalCost:{totalBrandCost?.totalCost} $</p>
+                </Item>:<Item>No Data</Item>
               }
 
               <h2>Recent brandstof buys </h2>

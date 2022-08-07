@@ -92,7 +92,7 @@ export default function AutoTable({ transition }) {
                   <TableCell>{auto.plateNumber}</TableCell>
                   <TableCell>{auto.yearOfConstruction}</TableCell>
                   <TableCell>{auto.tankVolume}</TableCell>
-                  <TableCell>{auto.availableBrandStof}</TableCell>
+                  <TableCell>{auto.availableBrandStof||0}</TableCell>
                   <td>            
                     <Fab variant='contained' size='small' style={{ float: 'right', marginLeft: '5px' }} color='error' title='Delete'  onClick={() => deleteAutoById(auto.autoId)}><DeleteIcon /></Fab>
                     <Fab variant='contained' size='small' style={{ float: 'right', marginLeft: '5px' }} color='secondary' title='Edit' onClick={() => popUpAddAutoOpen('editMode', auto)} ><Edit /></Fab>
