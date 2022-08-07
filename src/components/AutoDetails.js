@@ -17,22 +17,20 @@ export const AutoDetails = () => {
   const [autoUsages, setAutoUsages] = useState([])
 
   useEffect(() => {
-    getBrandStofs(autoId)
-    getAutoUsages(autoId)
+    getBrandStofs()
+    getAutoUsages()
   }, [])
 
 
-  const getBrandStofs = async (autoId) => {
+  const getBrandStofs = async () => {
     setIsLoaded(false)
     const response = await autoApi.get(`${autoId}/brandstofs`);
-    console.log(response.data.data)
     setBrandStofs(response.data.data)
     setIsLoaded(true)
   }
-  const getAutoUsages=async(autoId)=>{
+  const getAutoUsages=async()=>{
     setIsLoadedAutoUsage(false)
     const response=await autoApi.get(`${autoId}/auto-usages`);
-    console.log(response.data)
     setAutoUsages(response.data.data)
     setIsLoadedAutoUsage(true)
   }
@@ -46,14 +44,14 @@ export const AutoDetails = () => {
               <h2>Recent Auto Usages</h2>
               {!isLoadedAutoUsage ? <CircularProgress className='circular' /> :
                 autoUsages.map((autousage, index) => (
-                  <>
-                  <Item key={index}>
+                  <div key={index}>
+                  <Item >
                     <p>distance : {autousage.distance}</p>
                     <p>brandStofVerbruik : {autousage.brandStofVerbruik}</p>
                     <p>date : {autousage.date}</p>
                   </Item>
                   <br/>
-                  </>
+                  </div>
                 ))
               }
             </Grid>
@@ -61,14 +59,14 @@ export const AutoDetails = () => {
               <h2>Recent brandstof buys </h2>
               {!isLoaded ? <CircularProgress className='circular' /> :
                 brandStofs.map((brandstof, index) => (
-                  <>
+                  <div key={index}>
                   <Item>
                     <p>brandStofAmount : {brandstof.brandStofAmount}</p>
                     <p>price : {brandstof.price}</p>
                     <p>refuelingDate : {brandstof.refuelingDate}</p>
                   </Item>
                   <br/>
-                  </>
+                  </div>
                 ))
               }
 
