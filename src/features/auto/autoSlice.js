@@ -24,7 +24,7 @@ const autosSlice=createSlice({
         .addCase(fetchAutos.rejected,(state,action)=>{
             state.error=action.error.message;
             state.data=[];
-            toaster('error',action.payload.message)
+            toaster('error',action.error.message)
         })        
         .addCase(addAuto.pending,(state,action)=>{
             state.isLoaded=false;
@@ -36,7 +36,7 @@ const autosSlice=createSlice({
         })
         .addCase(addAuto.rejected,(state,action)=>{
             state.isLoaded=true;
-            toaster('error',action.payload.message)
+            toaster('error',action.error.message)
         })        
         .addCase(deleteAuto.pending,(state,action)=>{
             state.isLoaded=false;
@@ -49,7 +49,7 @@ const autosSlice=createSlice({
         })
         .addCase(deleteAuto.rejected,(state,action)=>{
             state.isLoaded=true;
-            toaster('error',action.payload.message)
+            toaster('error',action.error.message)
         }) 
         .addCase(updateAuto.pending,(state,action)=>{
             state.isLoaded=false;
@@ -62,7 +62,7 @@ const autosSlice=createSlice({
         })
         .addCase(updateAuto.rejected,(state,action)=>{
             state.isLoaded=true;
-            toaster('error',action.payload.message)
+            toaster('error',action.error.message)
         })
         .addCase(addBrandStof.pending,(state,action)=>{
             state.isLoaded=false;
@@ -75,13 +75,12 @@ const autosSlice=createSlice({
             if(modifiedAutoIndex.availableBrandStof){
                 brandstof=action.payload.data.brandStofAmount+modifiedAutoIndex.availableBrandStof;
             }
-            state.data.splice(modifiedAutoIndex,1,{...modifiedAutoIndex,availableBrandStof:brandstof})              
-            
+            state.data.splice(modifiedAutoIndex,1,{...modifiedAutoIndex,availableBrandStof:brandstof})                        
             toaster('success',action.payload.message)
         })
         .addCase(addBrandStof.rejected,(state,action)=>{
             state.isLoaded=true;
-            toaster('error',action.payload.message)
+            toaster('error',action.error.message)
         })
     }
 })

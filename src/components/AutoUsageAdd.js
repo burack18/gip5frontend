@@ -366,7 +366,7 @@ export const AutoUsageAdd = () => {
                             
                             <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
-                              label="Helper text example"
+                              label="Date"
                               value={values.date}
                               name='date'
                               onChange={(e)=>setFieldValue('date',moment(e))}

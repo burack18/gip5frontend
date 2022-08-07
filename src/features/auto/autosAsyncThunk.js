@@ -77,9 +77,8 @@ export const addBrandStof=createAsyncThunk(
         try {
             response = await autoApi.post(`${autoId}/brandstofs`,values);
         } catch (error) {
-            console.log(error)
             let Err={
-                message:'error',
+                message:error.response.data.message||'error',
                 isSuccess:false
             }
             throw Err;
