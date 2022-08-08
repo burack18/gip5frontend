@@ -77,7 +77,7 @@ export default function Chart({dateFilter}) {
                 ...theme.typography.body1,
               }}
             >
-              Sales ($)
+              Buys ($)
             </Label>
           </YAxis>
           <Line

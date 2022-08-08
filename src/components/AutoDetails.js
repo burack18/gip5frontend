@@ -88,7 +88,8 @@ export const AutoDetails = () => {
                   <p>plateNumber :{totalAutoUsage?.plateNumber}</p>
                   <p>Total distance:{totalAutoUsage?.totalDistance}</p>
                   <p>Count of Usage:{totalAutoUsage?.countOfUsage}</p>
-                  <p>Total brandstofverbruik:{totalAutoUsage?.brandStofVerbruik} $</p>
+                  <p>Total brandstofverbruik:{totalAutoUsage?.brandStofVerbruik} </p>
+                  <p>{(totalAutoUsage?.brandStofVerbruik/totalAutoUsage.totalDistance).toFixed(2)}Liter Brandstof per km</p>
                 </Item>:<Item>No Data</Item>
               }
               <h2>Recent Auto Usages</h2>
@@ -107,13 +108,14 @@ export const AutoDetails = () => {
               <Pagination count={5} onChange={(event, page) => setautoUsagePage(page)} color="primary" sx={{ marginTop: '5px' }} />
             </Grid>
             <Grid item xs={6}>
-              {!isLoadedTotalCost ? <CircularProgress className='circular' /> :
+              {!isLoadedTotalCost &&!isLoadedTotalAutousage ? <CircularProgress className='circular' /> :
                 totalBrandCost?
                 <Item>
                   <h3>Total BrandCost</h3>
                   <p>Plate number:{totalBrandCost?.plateNumber}</p>
                   <p>Count of Refueling:{totalBrandCost?.countOfRefueling}</p>
                   <p>totalCost:{totalBrandCost?.totalCost} $</p>
+                  <p>{(totalBrandCost?.totalCost/totalAutoUsage.totalDistance).toFixed(2)}$ Cost per km</p>               
                 </Item>:<Item>No Data</Item>
               }
 
