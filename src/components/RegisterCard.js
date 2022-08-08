@@ -2,8 +2,10 @@ import { Button, Card, CardActions, CardContent, Container, Typography } from '@
 import React, { useEffect, useState } from 'react'
 import VerifiedUserRoundedIcon from '@mui/icons-material/VerifiedUserRounded';
 import {useNavigate} from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 export const RegisterCard = () => {
+  const {t}=useTranslation();
     const [time, setTime] = useState(5)
     const navigate=useNavigate();
     let newIntervalId;
@@ -27,13 +29,13 @@ export const RegisterCard = () => {
                 Lizard
               </Typography>
               <Typography variant="body2" color="text.secondary">
-             Login Successfully
-             We will send you to Login Page In {time} seconds
+             {t('login.success')}
+             {t('login.success.message')} {time} seconds
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small">Share</Button>
-              <Button size="small">Learn More</Button>
+              <Button size="small">{t('share')}</Button>
+              <Button size="small">{t('learnmore')}</Button>
             </CardActions>
           </Card>
         </Container>

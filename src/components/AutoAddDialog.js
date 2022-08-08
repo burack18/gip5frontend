@@ -15,10 +15,12 @@ import { Container,  InputLabel, TextField } from '@mui/material';
 import { Formik,  Form } from 'formik';
 import { addAuto, updateAuto } from '../features/auto/autosAsyncThunk';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
+import { useTranslation } from 'react-i18next';
 
 
 export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
  const dispatch=useDispatch();
+ const { t } = useTranslation();
   return (
     <div>
       <Dialog
@@ -68,7 +70,7 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
             {({ handleChange, values, handleSubmit }) => (
               <div>
                 <Typography sx={{ ml: 2, flex: 1 ,marginTop:5}} variant="h6" component="div">
-                 {autoInitval.autoId?'Auto Edit Form':'Auto Add Form'} 
+                 {autoInitval.autoId?t('car.editform'):t('car.addform')} 
                 </Typography>
                 <Form style={{ marginTop: '5%' }}>
                   <div>
@@ -96,7 +98,7 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
                   </div>
                   <div>
 
-                    <InputLabel >Plate number</InputLabel>
+                    <InputLabel >{t('autotable.platenumber')}</InputLabel>
                     <TextField
                       name='plateNumber'
                       required
@@ -108,7 +110,7 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
                   </div>
                   <div>
 
-                    <InputLabel >Construction Year</InputLabel>
+                    <InputLabel >{t('datatable.constructionyear')}</InputLabel>
                     <TextField
                       name='yearOfConstruction'
                       required
@@ -132,7 +134,7 @@ export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
                   </div>
                
                   <Button onClick={handleSubmit} size='large' style={{ marginTop: '10px' }} variant="outlined" startIcon={<SaveIcon />}>
-                    Save
+                    {t('save')}
                   </Button>
                 </Form>
               </div>

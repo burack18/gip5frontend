@@ -28,8 +28,9 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddIcon from '@mui/icons-material/Add';
 import { AutoDetails } from './AutoDetails';
+import { useTranslation } from 'react-i18next';
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -78,6 +79,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 export const AutoDetailsPage = () => {
+    const { t } = useTranslation();
     const mdTheme = createTheme();
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const user = useSelector(state => state.user);
@@ -95,7 +97,7 @@ export const AutoDetailsPage = () => {
     };
 
     const handleCloseUserMenu = (setting) => {
-        if (setting === 'Logout') {
+        if (setting === 'Logout' || setting==='Uitloggen') {
             dispatch(logout())
             navigate('/login')
         }
@@ -189,19 +191,19 @@ export const AutoDetailsPage = () => {
                             </ListItemIcon>
                             <ListItemText primary="Dashboard" />
                         </ListItemButton>
-                        <ListItemButton>
+                        <ListItemButton disabled>
                             <ListItemIcon>
                                 <ShoppingCartIcon />
                             </ListItemIcon>
                             <ListItemText primary="Orders" />
                         </ListItemButton>
-                        <ListItemButton>
+                        <ListItemButton disabled>
                             <ListItemIcon>
                                 <PeopleIcon />
                             </ListItemIcon>
                             <ListItemText primary="Customers" />
                         </ListItemButton>
-                        <ListItemButton>
+                        <ListItemButton disabled>
                             <ListItemIcon>
                                 <BarChartIcon />
                             </ListItemIcon>
@@ -211,30 +213,30 @@ export const AutoDetailsPage = () => {
                             <ListItemIcon>
                                 <AddIcon />
                             </ListItemIcon>
-                            <ListItemText primary="Auto Usage Add" />
+                            <ListItemText primary={t('dashboard.add.autousage')} />
                         </ListItemButton>
                         <Divider sx={{ my: 1 }} />
                         <React.Fragment>
                             <ListSubheader component="div" inset>
-                                Saved reports
+                            {t('dashboard.savedreports')}
                             </ListSubheader>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <AssignmentIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Current month" />
+                                <ListItemText primary={t('dashboard.currentMonth')} />
                             </ListItemButton>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <AssignmentIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Last quarter" />
+                                <ListItemText primary={t('dashboard.lastQuarter')} />
                             </ListItemButton>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <AssignmentIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Year-end sale" />
+                                <ListItemText primary={t('dashboard.yearandsale')} />
                             </ListItemButton>
                         </React.Fragment>
                     </List>

@@ -12,6 +12,7 @@ import EuroIcon from '@mui/icons-material/Euro';
 import { Item } from './Item';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { addBrandStof } from '../features/auto/autosAsyncThunk';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -19,18 +20,17 @@ import { addBrandStof } from '../features/auto/autosAsyncThunk';
 
 
 export const BrandStofDialog = ({ open, dialogClose, auto }) => {
-
+  const {t} =useTranslation();
   const dispatch=useDispatch();
 
 
   return (
     open &&
     <Dialog open={open} onClose={dialogClose}>
-      <DialogTitle>Brandstof</DialogTitle>
+      <DialogTitle>{t('fuel')}</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
+          {t('addbrandstof.info')}
         </DialogContentText>
   
         <Grid container spacing={2}>
@@ -52,7 +52,7 @@ export const BrandStofDialog = ({ open, dialogClose, auto }) => {
                   <div>
                     <Form style={{ marginTop: '5%' }}>
                       <div>
-                        <InputLabel >Brandstof</InputLabel>
+                        <InputLabel >{t('fuel')}</InputLabel>
                         <Input
                           name='brandStofAmount'
                           required
@@ -66,7 +66,7 @@ export const BrandStofDialog = ({ open, dialogClose, auto }) => {
                         />
                       </div>
                       <div>
-                        <InputLabel >Price</InputLabel>
+                        <InputLabel >{t('price')}</InputLabel>
                         <Input
                           name='price'
                           required
@@ -79,8 +79,8 @@ export const BrandStofDialog = ({ open, dialogClose, auto }) => {
                         />
                       </div>
                       <DialogActions>
-                        <Button onClick={dialogClose}>Cancel</Button>
-                        <Button onClick={handleSubmit}>Save</Button>
+                        <Button onClick={dialogClose}>{t('cancel')}</Button>
+                        <Button onClick={handleSubmit}>{t('save')}</Button>
                       </DialogActions>
                     </Form>
                   </div>
@@ -98,7 +98,7 @@ export const BrandStofDialog = ({ open, dialogClose, auto }) => {
               Brandstof:{auto.availableBrandStof||0}
               </p>
               <p style={{color:'black',textAlign:'left'}}>
-              RefuelingCapacity:{auto.tankVolume-(auto.availableBrandStof||0)}
+              {t('capacity')}:{auto.tankVolume-(auto.availableBrandStof||0)}
               </p>
              
             </Item>

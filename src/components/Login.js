@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 import { useSelector,useDispatch } from 'react-redux';
 import { loginUser } from '../features/user/userSlice';
 import {useNavigate}from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 
 function Copyright(props) {
@@ -34,6 +35,7 @@ function Copyright(props) {
   
 
 export default  function Login() {
+  const { t } = useTranslation();
   const navigate=useNavigate();
   const user=useSelector(state=>state.user);
   const dispatch=useDispatch();
@@ -85,14 +87,14 @@ export default  function Login() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label={t('login.password')}
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label={t('login.rememberme')}
             />
             <Button
               type="submit"
@@ -100,18 +102,18 @@ export default  function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Login
+             {t('login.login')}
               
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                 {t('login.passwordforgot')}
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="register" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                {t('login.signup')}
                 </Link>
               </Grid>
             </Grid>

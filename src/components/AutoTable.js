@@ -17,9 +17,12 @@ import LocalGasStationOutlinedIcon from '@mui/icons-material/LocalGasStationOutl
 import { useNavigate } from 'react-router-dom';
 import { BrandStofDialog } from './BrandStofDialog';
 import { ThemeProvider } from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 
 export default function AutoTable({ transition }) {
+  const { t } = useTranslation();
+
   const [open, setOpen] = React.useState(false);
   const [isBrandStofDialogOpen, setIsBrandStofDialogOpen] = React.useState(false);
   const [autoInitval, setAutoInitval] = React.useState({})
@@ -29,7 +32,7 @@ export default function AutoTable({ transition }) {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    dispatch(fetchAutos()).unwrap().then(x=>console.log('anaekran'))
+    dispatch(fetchAutos())
   }, [])
 
   const dialogClose = () => {
@@ -58,8 +61,8 @@ export default function AutoTable({ transition }) {
   return (
     <React.Fragment>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Title>List of Autos</Title>
-        <IconButton variant='contained' color='success' onClick={() => popUpAddAutoOpen('addmode')} ><AddIcon /> AddAuto</IconButton>
+        <Title>{t('autotable.autolist')}</Title>
+        <IconButton variant='contained' color='success' onClick={() => popUpAddAutoOpen('addmode')} ><AddIcon />{t('autotable.addauto')}</IconButton>
       </div>
       {
         autos.isLoaded ?
@@ -69,8 +72,8 @@ export default function AutoTable({ transition }) {
 
                 <TableCell>Merk</TableCell>
                 <TableCell>Model</TableCell>
-                <TableCell>Plate Number</TableCell>
-                <TableCell>Construction Year</TableCell>
+                <TableCell>{t('autotable.platenumber')}</TableCell>
+                <TableCell>{t('datatable.constructionyear')}</TableCell>
                 <TableCell>Tank Volume</TableCell>
                 <TableCell>Brandstof</TableCell>
               </TableRow>
@@ -78,7 +81,6 @@ export default function AutoTable({ transition }) {
             <TableBody >
               {autos.data.slice((pageNumber - 1) * 5, pageNumber * 5).map((auto,index) => (
                 <TableRow key={index}>
-
                   <TableCell>{auto.merk}</TableCell>
                   <TableCell>{auto.model}</TableCell>
                   <TableCell>{auto.plateNumber}</TableCell>

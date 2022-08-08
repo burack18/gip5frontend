@@ -1,0 +1,89 @@
+{
+    "mainpage.description":"Deze applicatie helpt je om de brandstofstatus van de auto te volgen.",
+    "mainpage.showmore":"Laat meer zien",
+    "mainpage.projectdescription":"Deze applicatie is ontwikkeld door Omer Faruk Aksak. In deze applicatie wordt Spring boot gebruikt voor de backend, React.js wordt gebruikt voor de frontend en Postgresql wordt gebruikt voor de database. Het doel van het ontwikkelen van de applicatie is het 2022 2e semester gip5-huiswerk.",
+    "mainpage.abilitiesofapp":"In deze applicatie kunt u zich registreren, inloggen, een auto toevoegen aan uw account, de actuele informatie van uw auto's bekijken, wijzigingen aanbrengen en desgewenst de auto verwijderen. Daarnaast kunt u tijdens het rijden uw voertuig tanken en deze informatie vastleggen. U kunt deze informatie later in chronologische volgorde bekijken en de statistieken bekijken die op basis van deze informatie zijn gemaakt.",
+    "mainpage.thanks":"Ik hoop dat je het leuk vindt om het te gebruiken.",
+
+    "login.password":"Wachtwoord",
+    "login.rememberme":"Onthoud mij",
+    "login.login":"Inloggen",
+    "login.passwordforgot":"Wachtwoord vergeten?",
+    "login.signup":"Heb je geen account? Aanmelden",
+
+
+    "register.signup":"Aanmelden",
+    "register.firstName":"Voornaam",
+    "register.lastname":"Achternaam",
+    "register.password":"Wachtwoord",
+    "register.marketing":"Ik wil inspiratie, marketingacties en updates via e-mail ontvangen.",
+    "register.returnlogin":"Heb je al een account? Log in",
+    "dashboard.usermenu.profile":"Profiel",
+    "dashboard.usermenu.logout":"Uitloggen",
+    "dashboard.add.autousage":"Autogebruik Toevoegen",
+    "dashbard.savedreports":"Opgeslagen rapporten",
+    "dashboard.currentMonth":"Deze maand",
+    "dashboard.lastQuarter":"Vorig kwartaal",
+    "dashboard.yearandsale":"Jaar en verkoop",
+    "dashboard.maand":"maand",
+    "dashboard.alltime":"Altijd",
+
+
+
+    "chart.today":"Vandaag",
+    "chart.buys":"Koopt",
+
+
+
+    "deposit.allbrandcost":"Alle Brandstof-kosten",
+    "deposit.totalrefueling":"Totaal aantal tankbeurten",
+
+
+
+    "autotable.autolist":"Lijst met auto's",
+    "autotable.addauto":"Auto toevoegen",
+    "autotable.platenumber":"Plaat nummer",
+    "datatable.constructionyear":"Bouwjaar",
+    "autousage.addform.title":"Autousage-formulier",
+    "autousage.distance":"Afstand",
+    "autousage.fuelusage":"Hoeveelheid brandstofverbruik",
+    "save":"Opslaan",
+
+    "fuel":"Brandstof",
+    "price":"Prijs",
+    "cancel":"Annuleren",
+    "capacity":"Tankcapaciteit",
+    "addbrandstof.info":"Voer de hoeveelheid en prijs in waarmee u de auto heeft getankt.",
+
+
+    "autodetails.totalautousage":"Totaal autogebruik",
+    "totaldistance":"Totale afstand",
+    "countusage":"Aantal gebruik",
+    "totalfuelusage":"Totaal brandstofverbruik",
+    "nodata":"Geen Gegevens",
+
+    "recent.autousage":"Recent autogebruik",
+    "date":"datum",
+
+    "countofrefueling":"Aantal tankbeurten",
+    "totalcost":"Totale prijs",
+    "recentefuelbuys":"Recente brandstofaankopen",
+
+    "fuelamount":"Hoeveelheid brandstof",
+    "refuelingdate":"Datum van tanken",
+    "car.editform":"Auto Arrangement Formulier",
+    "car.addform" :"Voertuig toevoegen formulier",
+
+
+
+    "login.success":"Succesvol inloggen",
+    "login.success.message":"We sturen u naar de inlogpagina In",
+
+    "share":"Deel",
+    "learnmore":"Leer meer"
+    
+
+
+
+
+}   

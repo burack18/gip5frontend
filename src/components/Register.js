@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'
 import { registerUser } from '../features/user/userSlice';
 import { RegisterCard } from './RegisterCard';
+import { useTranslation } from 'react-i18next';
 
 
 
@@ -34,6 +35,7 @@ function Copyright(props) {
 }
 const theme = createTheme();
 export default function Register() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showCard, setShowCard] = useState(false)
@@ -71,7 +73,7 @@ export default function Register() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign up
+              {t('register.signup')}
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
@@ -82,7 +84,7 @@ export default function Register() {
                     required
                     fullWidth
                     id="firstName"
-                    label="First Name"
+                    label={t('register.firstName')}
                     autoFocus
                   />
                 </Grid>
@@ -91,7 +93,7 @@ export default function Register() {
                     required
                     fullWidth
                     id="lastName"
-                    label="Last Name"
+                    label={t('register.lastname')}
                     name="lastName"
                     autoComplete="family-name"
                   />
@@ -111,7 +113,7 @@ export default function Register() {
                     required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label={t('register.password')}
                     type="password"
                     id="password"
                     autoComplete="new-password"
@@ -120,7 +122,7 @@ export default function Register() {
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox value="allowExtraEmails" color="primary" />}
-                    label="I want to receive inspiration, marketing promotions and updates via email."
+                    label={t('register.marketing')}
                   />
                 </Grid>
               </Grid>
@@ -130,12 +132,12 @@ export default function Register() {
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign Up
+                {t('register.signup')}
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Link href="login" variant="body2">
-                    Already have an account? Sign in
+                    {t('register.returnlogin')}
                   </Link>
                 </Grid>
               </Grid>

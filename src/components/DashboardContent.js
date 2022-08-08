@@ -34,6 +34,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next';
 
 function Copyright(props) {
   return (
@@ -48,7 +49,7 @@ function Copyright(props) {
   );
 }
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -100,6 +101,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  const { t } = useTranslation();
   const [dateFilter, setdateFilter] =React.useState(999)
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -122,13 +124,13 @@ function DashboardContent() {
   };
 
   const handleCloseUserMenu = (setting) => {
-    if (setting === 'Logout') {
+    if (setting === 'Logout'||setting === 'Uitloggen') {
       dispatch(logout())
       navigate('/login')
     }
     setAnchorElUser(null);
   };
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const settings = [t('dashboard.usermenu.profile'), 'Account', 'Dashboard', t('dashboard.usermenu.logout')];
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -208,26 +210,26 @@ function DashboardContent() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List component="nav" onClick={(e) => console.log(e)}>
-            <ListItemButton>
+          <List component="nav" >
+            <ListItemButton  onClick={()=>navigate('/dashboard')}>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton disabled>
               <ListItemIcon>
                 <ShoppingCartIcon />
               </ListItemIcon>
               <ListItemText primary="Orders" />
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton disabled>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
               <ListItemText primary="Customers" />
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton disabled>
               <ListItemIcon>
                 <BarChartIcon />
               </ListItemIcon>
@@ -237,30 +239,30 @@ function DashboardContent() {
               <ListItemIcon>
                 <AddIcon />
               </ListItemIcon>
-              <ListItemText primary="Auto Usage Add" />
+              <ListItemText primary={t('dashboard.add.autousage')} />
             </ListItemButton>
             <Divider sx={{ my: 1 }} />
             <React.Fragment>
                             <ListSubheader component="div" inset>
-                                Saved reports
+                                {t('dashbard.savedreports')}
                             </ListSubheader>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <AssignmentIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Current month" />
+                                <ListItemText primary={t('dashboard.currentMonth')} />
                             </ListItemButton>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <AssignmentIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Last quarter" />
+                                <ListItemText primary={t('dashboard.lastQuarter')} />
                             </ListItemButton>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <AssignmentIcon />
                                 </ListItemIcon>
-                                <ListItemText primary="Year-end sale" />
+                                <ListItemText primary={t('dashboard.yearandsale')} />
                             </ListItemButton>
                         </React.Fragment>
           </List>
@@ -282,10 +284,10 @@ function DashboardContent() {
           <FormControl style={{width:'120px'}}>
           <InputLabel id="demo-simple-select-label">Filter</InputLabel>
           <Select labelId="demo-simple-select-label" value={dateFilter}  onChange={(e)=>setdateFilter(e.target.value)}>
-          <MenuItem  value={3}>3 Month</MenuItem>  
-          <MenuItem  value={6}>6 Month</MenuItem>  
-          <MenuItem  value={12}>12 Month(1 year)</MenuItem>  
-          <MenuItem  value={999}>All Time</MenuItem>  
+          <MenuItem  value={3}>3 {t('dashboard.maand')}</MenuItem>  
+          <MenuItem  value={6}>6 {t('dashboard.maand')}</MenuItem>  
+          <MenuItem  value={12}>12 {t('dashboard.maand')}(1 year)</MenuItem>  
+          <MenuItem  value={999}>{t('dashboard.alltime')}</MenuItem>  
           </Select >     
           </FormControl>     
             <Grid container spacing={3}>

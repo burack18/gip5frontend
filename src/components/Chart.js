@@ -6,18 +6,16 @@ import axios from 'axios';
 import { toaster } from '../utilities/toaster';
 import { useSelector } from 'react-redux';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 // Generate Sales Data
 function createData(time, amount) {
   return { time, amount };
 }
 
-const data = [
-  {month:'agustus',price: 0},
-  {month:'mart',price: 5}
-];
 
 export default function Chart({dateFilter}) {
+  const { t } = useTranslation();
   const theme = useTheme();
   const [data, setData] = React.useState([])
   const [isLoaded, setIsLoaded] = React.useState(true)
@@ -48,7 +46,7 @@ export default function Chart({dateFilter}) {
 
   return (
     <React.Fragment>
-      <Title>Today</Title>
+      <Title>{t('chart.today')}</Title>
       <ResponsiveContainer>
         <LineChart
           data={data}
@@ -77,7 +75,7 @@ export default function Chart({dateFilter}) {
                 ...theme.typography.body1,
               }}
             >
-              Buys ($)
+              {t('chart.buys')} (€)
             </Label>
           </YAxis>
           <Line

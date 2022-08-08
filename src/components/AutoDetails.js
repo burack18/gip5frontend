@@ -7,12 +7,13 @@ import { autoApi } from '../utilities/autoApi';
 import { Item } from './Item';
 import moment from 'moment';
 import { toaster } from '../utilities/toaster';
+import { useTranslation } from 'react-i18next';
 
 export const AutoDetails = () => {
 
   const { autoId } = useParams();
   const mdTheme = createTheme();
-
+  const { t } = useTranslation();
   const [isLoaded, setIsLoaded] = useState(true)
   const [isLoadedAutoUsage, setIsLoadedAutoUsage] = useState(true)
   const [isLoadedTotalCost, setisLoadedTotalCost] = useState(true)
@@ -84,22 +85,22 @@ export const AutoDetails = () => {
             {!isLoadedTotalAutousage? <CircularProgress className='circular' /> :
               totalAutoUsage?
                 <Item>
-                  <h3>Total AutoUsage</h3>
-                  <p>plateNumber :{totalAutoUsage?.plateNumber}</p>
-                  <p>Total distance:{totalAutoUsage?.totalDistance}</p>
-                  <p>Count of Usage:{totalAutoUsage?.countOfUsage}</p>
-                  <p>Total brandstofverbruik:{totalAutoUsage?.brandStofVerbruik} </p>
+                  <h3>{t('autodetails.totalautousage')}</h3>
+                  <p>{t('autotable.platenumber')} :{totalAutoUsage?.plateNumber}</p>
+                  <p>{t('totaldistance')}:{totalAutoUsage?.totalDistance}</p>
+                  <p>{t('countusage')}:{totalAutoUsage?.countOfUsage}</p>
+                  <p>{t('totalfuelusage')}:{totalAutoUsage?.brandStofVerbruik} </p>
                   <p>{(totalAutoUsage?.brandStofVerbruik/totalAutoUsage.totalDistance).toFixed(2)}Liter Brandstof per km</p>
-                </Item>:<Item>No Data</Item>
+                </Item>:<Item>{t('nodata')}</Item>
               }
-              <h2>Recent Auto Usages</h2>
+              <h2>{t('recent.autousage')}</h2>
               {!isLoadedAutoUsage ? <CircularProgress className='circular' /> :
                 autoUsages.slice((autoUsagePage - 1) * 3, autoUsagePage * 3).map((autousage, index) => (
                   <div key={index}>
                     <Item >
-                      <p>distance : {autousage.distance}</p>
-                      <p>brandStofVerbruik : {autousage.brandStofVerbruik}</p>
-                      <p>date : {autousage.date}</p>
+                      <p>{t('autousage.distance')} : {autousage.distance}</p>
+                      <p>{t('autousage.fuelusage')} : {autousage.brandStofVerbruik}</p>
+                      <p>{t('date')} : {autousage.date}</p>
                     </Item>
                     <br />
                   </div>
@@ -111,22 +112,22 @@ export const AutoDetails = () => {
               {!isLoadedTotalCost &&!isLoadedTotalAutousage ? <CircularProgress className='circular' /> :
                 totalBrandCost?
                 <Item>
-                  <h3>Total BrandCost</h3>
-                  <p>Plate number:{totalBrandCost?.plateNumber}</p>
-                  <p>Count of Refueling:{totalBrandCost?.countOfRefueling}</p>
-                  <p>totalCost:{totalBrandCost?.totalCost} $</p>
+                  <h3>{t('deposit.allbrandcost')}</h3>
+                  <p>{t('autotable.platenumber')} :{totalBrandCost?.plateNumber}</p>
+                  <p>{t('countofrefueling')}:{totalBrandCost?.countOfRefueling}</p>
+                  <p>{t('totalcost')}:{totalBrandCost?.totalCost} $</p>
                   <p>{(totalBrandCost?.totalCost/totalAutoUsage?.totalDistance).toFixed(2)}$ Cost per km</p>               
-                </Item>:<Item>No Data</Item>
+                </Item>:<Item>{t('nodata')}</Item>
               }
 
-              <h2>Recent brandstof buys </h2>
+              <h2>{t('recentefuelbuys')} </h2>
               {!isLoaded ? <CircularProgress className='circular' /> :
                 brandStofs.slice((brandStofPage - 1) * 3, brandStofPage * 3).map((brandstof, index) => (
                   <div key={index}>
                     <Item>
-                      <p>brandStofAmount : {brandstof.brandStofAmount}</p>
-                      <p>price : {brandstof.price}</p>
-                      <p>refuelingDate : {moment(brandstof.refuelingDate).format('YYYY-MM-DD HH:mm:ss')}</p>
+                      <p>{t('fuelamount')} : {brandstof.brandStofAmount}</p>
+                      <p>{t('price')} : {brandstof.price}</p>
+                      <p>{t('refuelingdate')} : {moment(brandstof.refuelingDate).format('YYYY-MM-DD HH:mm:ss')}</p>
                     </Item>
                     <br />
                   </div>

@@ -37,9 +37,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import moment from 'moment';
 import { autoApi } from '../utilities/autoApi';
 import { toaster } from '../utilities/toaster';
+import { useTranslation } from 'react-i18next';
 
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
@@ -89,11 +90,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 export const AutoUsageAdd = () => {
-
+  const {t}=useTranslation();
   const mdTheme = createTheme();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const user = useSelector(state => state.user);
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const settings = [t('dashboard.usermenu.profile'), 'Account', 'Dashboard', t('dashboard.usermenu.logout')];
   const [open, setOpen] = React.useState(true);
   const autos = useSelector(state => state.autos);
   console.log(autos)
@@ -108,7 +109,7 @@ export const AutoUsageAdd = () => {
   };
 
   const handleCloseUserMenu = (setting) => {
-    if (setting === 'Logout') {
+    if (setting === 'Logout' ||setting === 'Uitloggen') {
       dispatch(logout())
       navigate('/login')
     }
@@ -201,13 +202,13 @@ export const AutoUsageAdd = () => {
               </ListItemIcon>
               <ListItemText primary="Dashboard" />
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton disabled>
               <ListItemIcon>
                 <ShoppingCartIcon />
               </ListItemIcon>
               <ListItemText primary="Orders" />
             </ListItemButton>
-            <ListItemButton>
+            <ListItemButton disabled>
               <ListItemIcon>
                 <PeopleIcon />
               </ListItemIcon>
@@ -223,30 +224,30 @@ export const AutoUsageAdd = () => {
               <ListItemIcon>
                 <AddIcon />
               </ListItemIcon>
-              <ListItemText primary="Auto Usage Add" />
+              <ListItemText primary={t('dashboard.add.autousage')} />
             </ListItemButton>
             <Divider sx={{ my: 1 }} />
             <React.Fragment>
               <ListSubheader component="div" inset>
-                Saved reports
+              {t('dashboard.savedreports')}
               </ListSubheader>
               <ListItemButton>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Current month" />
+                <ListItemText primary={t('dashboard.currentMonth')} />
               </ListItemButton>
               <ListItemButton>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Last quarter" />
+                <ListItemText primary={t('dashboard.lastQuarter')} />
               </ListItemButton>
               <ListItemButton>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
-                <ListItemText primary="Year-end sale" />
+                <ListItemText primary={t('dashboard.yearandsale')} />
               </ListItemButton>
             </React.Fragment>
           </List>
@@ -287,14 +288,14 @@ export const AutoUsageAdd = () => {
                 <div>
                   <Container>
                     <Typography sx={{ ml: 2, flex: 1, marginTop: 5 }} variant="h6" component="div">
-                      Autousage add form
+                      {t('autousage.addform.title')}
                     </Typography>
 
                     <Form style={{ marginTop: '5%' }}>
                       <Grid container spacing={2}>
                         <Grid item xs={3}>
                           <FormControl fullWidth>
-                            <InputLabel>asd</InputLabel>
+                            <InputLabel>Auto</InputLabel>
                             <Select                             
                               name='auto'
                               required
@@ -310,7 +311,7 @@ export const AutoUsageAdd = () => {
                         </Grid>
                         <Grid item xs={3}>
                           <FormControl fullWidth>
-                            <InputLabel >Distance</InputLabel>
+                            <InputLabel >{t('autousage.distance')}</InputLabel>
                             <Input
                               name='distance'
                               id="outlined-number"
@@ -325,7 +326,7 @@ export const AutoUsageAdd = () => {
                         </Grid>
                         <Grid item xs={3}>
                           <FormControl fullWidth>
-                            <InputLabel >Brand Verbruik</InputLabel>
+                            <InputLabel >{t('autousage.fuelusage')}</InputLabel>
                             <FilledInput
                               name='brandStofVerbruik'
                               required
@@ -354,7 +355,7 @@ export const AutoUsageAdd = () => {
                         </Grid>
                       </Grid>
                       <Button onClick={handleSubmit} size='large' style={{ marginTop: '10px' }} variant="outlined" startIcon={<SaveIcon />}>
-                        Save
+                        {t('save')}
                       </Button>
                     </Form>
                   </Container>

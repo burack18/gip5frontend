@@ -27,14 +27,14 @@ i18n
   .use(HttpApi)
   .init({
     fallbackLng: "en",
-    detection: { order: ['cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'], caches: ['cookie'] },
-    backend: { loadPath: `/assets/locales/fr/translation.json` }
+    detection: { order: ['cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'] },
+    backend: { loadPath: `/assets/locales/nl/translation.json` }
   });
 
 
 function App() {
   const { t } = useTranslation();
- 
+
 
   return (
     <div>

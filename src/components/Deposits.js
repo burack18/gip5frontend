@@ -6,8 +6,11 @@ import { toaster } from '../utilities/toaster';
 import { CircularProgress } from '@mui/material';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 export default function Deposits({dateFilter}) {
+  const { t } = useTranslation();
+
 const [isLoaded, setisLoaded] = React.useState(true)
 const [totalCost, setTotalCost] = React.useState({})
 const [isLoadedTotalAutousage, setisLoadedTotalAutousage] = React.useState(true)
@@ -57,7 +60,7 @@ const getTotalBrandCost = async () => {
     !isLoaded ? <CircularProgress className='circular' /> :
     totalCost?
     <React.Fragment>
-      <Title>All BrandStof Cost</Title>
+      <Title>{t('deposit.allbrandcost')}</Title>
       <Typography component="p" variant="h4">
         ${totalCost.totalCost}
       </Typography>
@@ -65,10 +68,10 @@ const getTotalBrandCost = async () => {
         {moment().format('MM/dd/yyyy')}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        {isLoadedTotalAutousage&&<>{(totalCost.totalCost/totalAutoUsage.totalDistance).toFixed(2)} $ per km</>}
+        {isLoadedTotalAutousage&&<>{(totalCost.totalCost/totalAutoUsage.totalDistance).toFixed(2)} € per km</>}
       </Typography>
       <div>
-        <p>Total count of Refueling : {totalCost.countOfRefueling} </p>{}
+        <p>{t('deposit.totalrefueling')} : {totalCost.countOfRefueling} </p>{}
       </div>
     </React.Fragment>:
     <div>No data</div>
