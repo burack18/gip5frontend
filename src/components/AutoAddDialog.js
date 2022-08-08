@@ -11,18 +11,14 @@ import SaveIcon from '@mui/icons-material/Save';
 
 import CloseIcon from '@mui/icons-material/Close';
 
-import { Box, Container, FormControl, Input, InputLabel, TextField } from '@mui/material';
-import { Formik, Field, Form } from 'formik';
-import { Label } from 'recharts';
+import { Container,  InputLabel, TextField } from '@mui/material';
+import { Formik,  Form } from 'formik';
 import { addAuto, updateAuto } from '../features/auto/autosAsyncThunk';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
-import { useNavigate } from 'react-router-dom';
 
 
 export const AutoAddDialog = ({ autoInitval,open, handleClose,transition }) => {
  const dispatch=useDispatch();
- const navigate=useNavigate(); 
-
   return (
     <div>
       <Dialog

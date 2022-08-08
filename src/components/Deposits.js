@@ -1,17 +1,11 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Title from './Title';
-import { autoApi } from '../utilities/autoApi';
 import axios from 'axios';
 import { toaster } from '../utilities/toaster';
 import { CircularProgress } from '@mui/material';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
-
-function preventDefault(event) {
-  event.preventDefault();
-}
 
 export default function Deposits({dateFilter}) {
 const [isLoaded, setisLoaded] = React.useState(true)
@@ -36,7 +30,6 @@ const getTotalAutoUsages = async () => {
         'Authorization':token
       }
     })
-    console.log(response)
     settotalAutoUsage(response.data)
   } catch (error) {
   }

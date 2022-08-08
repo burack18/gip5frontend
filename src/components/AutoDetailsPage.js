@@ -9,42 +9,25 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Deposits from './Deposits';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Button, ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
-import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
-import Slide from '@mui/material/Slide';
-import { fetchAutos } from '../features/auto/autosAsyncThunk';
-import AutoTable from './AutoTable'
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
-import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddIcon from '@mui/icons-material/Add';
-import PrivateRoute from '../utilities/PrivateRoute';
-import Dashboard from './DashboardContent';
 import { AutoDetails } from './AutoDetails';
-import { MainPage } from '../pages/MainPage';
-import { AutoUsageAdd } from './AutoUsageAdd';
-import Register from './Register';
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -112,7 +95,7 @@ export const AutoDetailsPage = () => {
     };
 
     const handleCloseUserMenu = (setting) => {
-        if (setting == 'Logout') {
+        if (setting === 'Logout') {
             dispatch(logout())
             navigate('/login')
         }

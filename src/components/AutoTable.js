@@ -1,17 +1,15 @@
 import * as React from 'react';
-import Link from '@mui/material/Link';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Title from './Title';
-import { Button, CircularProgress, createTheme, Fab, IconButton, Pagination, Stack } from '@mui/material';
+import {  CircularProgress, createTheme, Fab, IconButton, Pagination } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Edit } from '@mui/icons-material';
 import AddIcon from '@mui/icons-material/Add';
 import { AutoAddDialog } from './AutoAddDialog';
-import Slide from '@mui/material/Slide';
 import { deleteAuto, fetchAutos } from '../features/auto/autosAsyncThunk';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
@@ -44,12 +42,6 @@ export default function AutoTable({ transition }) {
     setIsBrandStofDialogOpen(true)
   }
 
-  function preventDefault(event) {
-    event.preventDefault();
-  }
-  const getRow = (e) => {
-    console.log(e)
-  }
   const popUpAddAutoOpen = (type, auto = {}) => {
     if (type === 'addmode') setAutoInitval({})
     else if (type === 'editMode') setAutoInitval(auto)

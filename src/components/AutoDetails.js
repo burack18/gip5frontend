@@ -115,7 +115,7 @@ export const AutoDetails = () => {
                   <p>Plate number:{totalBrandCost?.plateNumber}</p>
                   <p>Count of Refueling:{totalBrandCost?.countOfRefueling}</p>
                   <p>totalCost:{totalBrandCost?.totalCost} $</p>
-                  <p>{(totalBrandCost?.totalCost/totalAutoUsage.totalDistance).toFixed(2)}$ Cost per km</p>               
+                  <p>{(totalBrandCost?.totalCost/totalAutoUsage?.totalDistance).toFixed(2)}$ Cost per km</p>               
                 </Item>:<Item>No Data</Item>
               }
 

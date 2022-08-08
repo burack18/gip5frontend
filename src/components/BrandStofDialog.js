@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -10,12 +9,9 @@ import {  Grid, Input, InputAdornment, InputLabel } from '@mui/material';
 import { Form, Formik } from 'formik';
 import OilBarrelIcon from '@mui/icons-material/OilBarrel';
 import EuroIcon from '@mui/icons-material/Euro';
-import { autoApi } from '../utilities/autoApi';
 import { Item } from './Item';
-import { toaster } from '../utilities/toaster';
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import { addBrandStof } from '../features/auto/autosAsyncThunk';
-import { ThemeProvider  } from '@mui/material/styles';
 
 
 

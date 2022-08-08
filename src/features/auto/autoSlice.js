@@ -74,7 +74,7 @@ const autosSlice=createSlice({
             if(modifiedAutoIndex.availableBrandStof){
                 brandstof=action.payload.data.brandStofAmount+modifiedAutoIndex.availableBrandStof;
             } 
-            var index=state.data.indexOf(x=>x.autoId===modifiedAutoIndex.autoId)                 
+            var index=state.data.findIndex(x=>x.autoId===modifiedAutoIndex.autoId)                 
             state.data.splice(index,1,{...modifiedAutoIndex,availableBrandStof:(brandstof||action.payload.data.brandStofAmount)})   
             toaster('success',action.payload.message)
         })
