@@ -23,7 +23,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Deposits from './Deposits';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Button, ListItemButton, ListItemIcon, Tooltip } from '@mui/material';
+import { Button, FormControl, InputLabel, ListItemButton, ListItemIcon, Select, Tooltip } from '@mui/material';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
@@ -106,6 +106,7 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [dateFilter, setdateFilter] =React.useState(999)
   const openMenu = Boolean(anchorEl);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -300,6 +301,15 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <FormControl style={{width:'120px'}}>
+          <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+          <Select labelId="demo-simple-select-label" value={dateFilter}  onChange={(e)=>setdateFilter(e.target.value)}>
+          <MenuItem  value={3}>3 Month</MenuItem>  
+          <MenuItem  value={6}>6 Month</MenuItem>  
+          <MenuItem  value={12}>12 Month(1 year)</MenuItem>  
+          <MenuItem  value={999}>All Time</MenuItem>  
+          </Select >     
+          </FormControl>     
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
@@ -311,7 +321,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Chart count={count} />
+                  <Chart dateFilter={dateFilter} />
                 </Paper>
               </Grid>
               {/* Recent Deposits */}
@@ -324,7 +334,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Deposits />
+                  <Deposits dateFilter={dateFilter}/>
                 </Paper>
               </Grid>
               {/* Recent Orders */}

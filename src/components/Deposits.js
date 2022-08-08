@@ -13,21 +13,23 @@ function preventDefault(event) {
   event.preventDefault();
 }
 
-export default function Deposits() {
+export default function Deposits({dateFilter}) {
 const [isLoaded, setisLoaded] = React.useState(true)
 const [totalCost, setTotalCost] = React.useState({})
 const autos=useSelector(state=>state.autos);
 
 React.useEffect(() => {
 getTotalBrandCost()
-}, [autos])
+}, [autos,dateFilter])
 
 
 const getTotalBrandCost = async () => {
   setisLoaded(false)
   try {
+    const url=!dateFilter||dateFilter===999?`${process.env.REACT_APP_BASEURL}/brandstofs/totalcost`
+    :`${process.env.REACT_APP_BASEURL}/brandstofs/totalcost?date=${moment().subtract(dateFilter,'months').format('MM/DD/yyyy')}`
     const token=localStorage.getItem('token')
-    const response = await axios.get(`${process.env.REACT_APP_BASEURL}/brandstofs`,{
+    const response = await axios.get(url,{
       headers:{
         'Authorization':token
       }

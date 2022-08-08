@@ -5,6 +5,7 @@ import Title from './Title';
 import axios from 'axios';
 import { toaster } from '../utilities/toaster';
 import { useSelector } from 'react-redux';
+import moment from 'moment';
 
 // Generate Sales Data
 function createData(time, amount) {
@@ -16,22 +17,24 @@ const data = [
   {month:'mart',price: 5}
 ];
 
-export default function Chart() {
+export default function Chart({dateFilter}) {
   const theme = useTheme();
   const [data, setData] = React.useState([])
   const [isLoaded, setIsLoaded] = React.useState(true)
   const autos=useSelector(state=>state.autos);
 
-  React.useEffect(() => {
-    getData()
-  }, [autos])
+  React.useEffect(() => {    
+      getData()
+  }, [autos,dateFilter])
   
 
   const getData= async()=>{
+    const url=!dateFilter||dateFilter===999?`${process.env.REACT_APP_BASEURL}/brandstofs/months`
+    :`${process.env.REACT_APP_BASEURL}/brandstofs/months?date=${moment().subtract(dateFilter,'months').format('MM/DD/yyyy')}`
     setIsLoaded(false)
     try {
       const token=localStorage.getItem('token')
-      const response=await axios.get(`${process.env.REACT_APP_BASEURL}/brandstofs/months`,{
+      const response=await axios.get(url,{
         headers:{
           'Authorization':token
         }
