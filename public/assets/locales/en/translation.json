@@ -1,3 +1,84 @@
 {
-    "Welcome to React": "Welcome to React and react-i18next"
+    "mainpage.description":"This application helps you to track the fuel status of the car.",
+    "mainpage.showmore":"Show more",
+    "mainpage.projectdescription":"This application is developed by Omer Faruk Aksak. In this application, Spring boot is used for the backend, React.js is used for the frontend and Postgresql is used for the database. The purpose of developing the application is the 2022 2nd semester gip5 homework.",
+    "mainpage.abilitiesofapp":"In this application you can register, log in, add a car to your account, view the current information of your cars, make changes and delete the car if you wish. In addition, you can refuel your vehicle while driving and record this information. You can view this information later in chronological order and view the statistics created from this information.",
+    "mainpage.thanks":"I hope you enjoy using it.",
+
+    "login.password":"Password",
+    "login.rememberme":"Remember me",
+    "login.login":"Login",
+    "login.passwordforgot":"Forgot your password?",
+    "login.signup":"Do not have an account? Sign Up",
+
+
+    "register.signup":"Sign Up",
+    "register.firstName":"First Name",
+    "register.lastname":"Last Name",
+    "register.password":"Password",
+    "register.marketing":"I want to receive inspiration, marketing campaigns and updates by e-mail.",
+    "register.returnlogin":"Do you already have an account? Login",
+    "dashboard.usermenu.profile":"Profile",
+    "dashboard.usermenu.logout":"Log Out",
+    "dashboard.add.autousage":"Autousage Add",
+    "dashbard.savedreports":"Saved reports",
+    "dashboard.currentMonth":"This month",
+    "dashboard.lastQuarter":"Last quarter",
+    "dashboard.yearandsale":"Year and sales",
+    "dashboard.maand":"month",
+    "dashboard.alltime":"All Time",
+
+
+
+    "chart.today":"Today",
+    "chart.buys":"Buys",
+
+
+
+    "deposit.allbrandcost":"Total Fuel Costs",
+    "deposit.totalrefueling":"Total number of refuels",
+
+
+
+    "autotable.autolist":"List of cars",
+    "autotable.addauto":"Add Car",
+    "autotable.platenumber":"Plate number",
+    "datatable.constructionyear":"Construction Year",
+    "autousage.addform.title":"Autousage Form",
+    "autousage.distance":"Distance",
+    "autousage.fuelusage":"Amount of fuel Consumption",
+    "save":"Save",
+
+    "fuel":"Fuel",
+    "price":"Price",
+    "cancel":"Cancel",
+    "capacity":"Tank capacity",
+    "addbrandstof.info":"Enter the amount and price with which you refueled the car.",
+
+
+    "autodetails.totalautousage":"Total Autousage",
+    "totaldistance":"Total Distance",
+    "countusage":"Number of Uses",
+    "totalfuelusage":"Total Fuel Consumption",
+    "nodata":"No Data",
+
+    "recent.autousage":"Recent Autousage",
+    "date":"date",
+
+    "countofrefueling":"Number of Refuels",
+    "totalcost":"Total Price",
+    "recentefuelbuys":"Recent Fuel Purchases",
+
+    "fuelamount":"Amount of fuel",
+    "refuelingdate":"Date of refueling",
+    "car.editform":"Car Edit Form",
+    "car.addform" :"Car Add Form",
+
+
+
+    "login.success":"Successful login",
+    "login.success.message":"We'll send you to the login page In",
+
+    "share":"Share",
+    "learnmore":"Learn more"
 }

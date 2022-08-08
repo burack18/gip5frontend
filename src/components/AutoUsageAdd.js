@@ -38,6 +38,9 @@ import moment from 'moment';
 import { autoApi } from '../utilities/autoApi';
 import { toaster } from '../utilities/toaster';
 import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
+import LanguageIcon from '@mui/icons-material/Language';
+import { US,NL, FR } from 'country-flag-icons/react/3x2';
 
 
 const drawerWidth = 250;
@@ -97,6 +100,20 @@ export const AutoUsageAdd = () => {
   const settings = [t('dashboard.usermenu.profile'), 'Account', 'Dashboard', t('dashboard.usermenu.logout')];
   const [open, setOpen] = React.useState(true);
   const autos = useSelector(state => state.autos);
+  const [anchorElUserLanguage, setanchorElUserLanguage] = React.useState(null);
+  const handleOpenLanguageMenu = (event) => {
+    setanchorElUserLanguage(event.currentTarget);
+  };
+  const handleCloseUserMenuLanguage = (language) => {
+    if(language==='EN'){
+      i18next.changeLanguage('en')
+    }else if(language==='NL'){
+      i18next.changeLanguage('nl')
+    } else if(language==='FR'){
+      i18next.changeLanguage('fr')
+    }
+    setanchorElUserLanguage(null);
+  };
   console.log(autos)
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -148,6 +165,8 @@ export const AutoUsageAdd = () => {
               Dashboard
             </Typography>
             <div>
+            <IconButton onClick={handleOpenLanguageMenu}><LanguageIcon style={{color:'white'}}  /></IconButton>
+
               <Tooltip title="Open settings">
                 {user.data.username === undefined ? <Button variant='contained' color='error' >Login</Button>
                   : <IconButton color="inherit" onClick={handleOpenUserMenu}>
@@ -158,6 +177,38 @@ export const AutoUsageAdd = () => {
               </Tooltip>
             </div>
           </Toolbar>
+          <Menu
+            sx={{ mt: '35px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUserLanguage}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUserLanguage)}
+            onClose={handleCloseUserMenuLanguage}
+          >
+              <MenuItem onClick={()=>handleCloseUserMenuLanguage('EN')}>
+                <div>
+                <span><US  style={{width:'20px',marginRight:'5px'}} /></span>EN                           
+                </div>
+              </MenuItem>
+              <MenuItem onClick={()=>handleCloseUserMenuLanguage('NL')}>
+                <div>
+                <span><NL  style={{width:'20px',marginRight:'5px'}} /></span>NL                           
+                </div>
+              </MenuItem>   
+              <MenuItem onClick={()=>handleCloseUserMenuLanguage('FR')}>
+                <div>
+                <span><FR  style={{width:'20px',marginRight:'5px'}} /></span>FR                           
+                </div>
+              </MenuItem>          
+          </Menu>
           <Menu
             sx={{ mt: '35px' }}
             id="menu-appbar"

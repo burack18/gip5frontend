@@ -27,8 +27,8 @@ i18n
   .use(HttpApi)
   .init({
     fallbackLng: "en",
-    detection: { order: ['cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'] },
-    backend: { loadPath: `/assets/locales/nl/translation.json` }
+    detection: { order: ['cookie', 'localStorage', 'sessionStorage', 'navigator', 'htmlTag', 'path', 'subdomain'] ,caches:['cookie']},
+    backend: { loadPath: `/assets/locales/{{lng}}/translation.json` }
   });
 
 

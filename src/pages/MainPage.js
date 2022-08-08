@@ -20,6 +20,7 @@ import {useNavigate} from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
 
 
+
 export const MainPage = () => {
     const { t } = useTranslation();
     
@@ -45,6 +46,7 @@ export const MainPage = () => {
     }
     return (
         <Container>
+            
             <Card sx={{ maxWidth: '100%' }}>
                 <CardHeader
                     avatar={

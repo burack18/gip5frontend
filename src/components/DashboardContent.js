@@ -21,7 +21,7 @@ import Deposits from './Deposits';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Button, FormControl, InputLabel, ListItemButton, ListItemIcon, Select, Tooltip } from '@mui/material';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../features/user/userSlice';
 import Slide from '@mui/material/Slide';
@@ -34,6 +34,9 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddIcon from '@mui/icons-material/Add';
+import LanguageIcon from '@mui/icons-material/Language';
+import { US,NL, FR } from 'country-flag-icons/react/3x2';
+import i18next from 'i18next';
 import { useTranslation } from 'react-i18next';
 
 function Copyright(props) {
@@ -102,7 +105,7 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   const { t } = useTranslation();
-  const [dateFilter, setdateFilter] =React.useState(999)
+  const [dateFilter, setdateFilter] = React.useState(999)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector(state => state.user);
@@ -118,13 +121,27 @@ function DashboardContent() {
     setOpen(!open);
   };
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const [anchorElUserLanguage, setanchorElUserLanguage] = React.useState(null);
+  const handleOpenLanguageMenu = (event) => {
+    setanchorElUserLanguage(event.currentTarget);
+  };
+  const handleCloseUserMenuLanguage = (language) => {
+    if(language==='EN'){
+      i18next.changeLanguage('en')
+    }else if(language==='NL'){
+      i18next.changeLanguage('nl')
+    }
+    else if(language==='FR'){
+      i18next.changeLanguage('fr')
+    }
+    setanchorElUserLanguage(null);
+  };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = (setting) => {
-    if (setting === 'Logout'||setting === 'Uitloggen') {
+    if (setting === 'Logout' || setting === 'Uitloggen') {
       dispatch(logout())
       navigate('/login')
     }
@@ -163,6 +180,9 @@ function DashboardContent() {
               Dashboard
             </Typography>
             <div>
+              
+                <IconButton onClick={handleOpenLanguageMenu}><LanguageIcon style={{color:'white'}}  /></IconButton>
+              
               <Tooltip title="Open settings">
                 {user.data.username === undefined ? <Button variant='contained' color='error' >Login</Button>
                   : <IconButton color="inherit" onClick={handleOpenUserMenu}>
@@ -171,8 +191,41 @@ function DashboardContent() {
                 }
 
               </Tooltip>
+
             </div>
           </Toolbar>
+          <Menu
+            sx={{ mt: '35px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUserLanguage}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUserLanguage)}
+            onClose={handleCloseUserMenuLanguage}
+          >
+              <MenuItem onClick={()=>handleCloseUserMenuLanguage('EN')}>
+                <div>
+                <span><US  style={{width:'20px',marginRight:'5px'}} /></span>EN                           
+                </div>
+              </MenuItem>
+              <MenuItem onClick={()=>handleCloseUserMenuLanguage('NL')}>
+                <div>
+                <span><NL  style={{width:'20px',marginRight:'5px'}} /></span>NL                           
+                </div>
+              </MenuItem>   
+              <MenuItem onClick={()=>handleCloseUserMenuLanguage('FR')}>
+                <div>
+                <span><FR  style={{width:'20px',marginRight:'5px'}} /></span>FR                           
+                </div>
+              </MenuItem>         
+          </Menu>
           <Menu
             sx={{ mt: '35px' }}
             id="menu-appbar"
@@ -211,7 +264,7 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav" >
-            <ListItemButton  onClick={()=>navigate('/dashboard')}>
+            <ListItemButton onClick={() => navigate('/dashboard')}>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
@@ -235,7 +288,7 @@ function DashboardContent() {
               </ListItemIcon>
               <ListItemText primary="Reports" />
             </ListItemButton>
-            <ListItemButton onClick={()=>navigate('/auto-usage')}>
+            <ListItemButton onClick={() => navigate('/auto-usage')}>
               <ListItemIcon>
                 <AddIcon />
               </ListItemIcon>
@@ -243,28 +296,28 @@ function DashboardContent() {
             </ListItemButton>
             <Divider sx={{ my: 1 }} />
             <React.Fragment>
-                            <ListSubheader component="div" inset>
-                                {t('dashbard.savedreports')}
-                            </ListSubheader>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AssignmentIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={t('dashboard.currentMonth')} />
-                            </ListItemButton>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AssignmentIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={t('dashboard.lastQuarter')} />
-                            </ListItemButton>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <AssignmentIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={t('dashboard.yearandsale')} />
-                            </ListItemButton>
-                        </React.Fragment>
+              <ListSubheader component="div" inset>
+                {t('dashbard.savedreports')}
+              </ListSubheader>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary={t('dashboard.currentMonth')} />
+              </ListItemButton>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary={t('dashboard.lastQuarter')} />
+              </ListItemButton>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AssignmentIcon />
+                </ListItemIcon>
+                <ListItemText primary={t('dashboard.yearandsale')} />
+              </ListItemButton>
+            </React.Fragment>
           </List>
         </Drawer>
         <Box
@@ -281,15 +334,15 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-          <FormControl style={{width:'120px'}}>
-          <InputLabel id="demo-simple-select-label">Filter</InputLabel>
-          <Select labelId="demo-simple-select-label" value={dateFilter}  onChange={(e)=>setdateFilter(e.target.value)}>
-          <MenuItem  value={3}>3 {t('dashboard.maand')}</MenuItem>  
-          <MenuItem  value={6}>6 {t('dashboard.maand')}</MenuItem>  
-          <MenuItem  value={12}>12 {t('dashboard.maand')}(1 year)</MenuItem>  
-          <MenuItem  value={999}>{t('dashboard.alltime')}</MenuItem>  
-          </Select >     
-          </FormControl>     
+            <FormControl style={{ width: '120px' }}>
+              <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+              <Select labelId="demo-simple-select-label" value={dateFilter} onChange={(e) => setdateFilter(e.target.value)}>
+                <MenuItem value={3}>3 {t('dashboard.maand')}</MenuItem>
+                <MenuItem value={6}>6 {t('dashboard.maand')}</MenuItem>
+                <MenuItem value={12}>12 {t('dashboard.maand')}(1 year)</MenuItem>
+                <MenuItem value={999}>{t('dashboard.alltime')}</MenuItem>
+              </Select >
+            </FormControl>
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={9}>
@@ -314,7 +367,7 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  <Deposits dateFilter={dateFilter}/>
+                  <Deposits dateFilter={dateFilter} />
                 </Paper>
               </Grid>
               {/* Recent Orders */}
@@ -327,7 +380,7 @@ function DashboardContent() {
             <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
-      </Box>           
+      </Box>
     </ThemeProvider>
   );
 }

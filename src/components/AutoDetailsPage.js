@@ -29,6 +29,9 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import AddIcon from '@mui/icons-material/Add';
 import { AutoDetails } from './AutoDetails';
 import { useTranslation } from 'react-i18next';
+import LanguageIcon from '@mui/icons-material/Language';
+import { US, NL, FR } from 'country-flag-icons/react/3x2';
+import i18next from 'i18next';
 
 const drawerWidth = 250;
 const AppBar = styled(MuiAppBar, {
@@ -89,6 +92,21 @@ export const AutoDetailsPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    const [anchorElUserLanguage, setanchorElUserLanguage] = React.useState(null);
+    const handleOpenLanguageMenu = (event) => {
+        setanchorElUserLanguage(event.currentTarget);
+    };
+    const handleCloseUserMenuLanguage = (language) => {
+        if (language === 'EN') {
+            i18next.changeLanguage('en')
+        } else if (language === 'NL') {
+            i18next.changeLanguage('nl')
+        } else if (language === 'FR') {
+            i18next.changeLanguage('fr')
+        }
+        setanchorElUserLanguage(null);
+    };
+
     const toggleDrawer = () => {
         setOpen(!open);
     };
@@ -97,7 +115,7 @@ export const AutoDetailsPage = () => {
     };
 
     const handleCloseUserMenu = (setting) => {
-        if (setting === 'Logout' || setting==='Uitloggen') {
+        if (setting === 'Logout' || setting === 'Uitloggen') {
             dispatch(logout())
             navigate('/login')
         }
@@ -137,6 +155,8 @@ export const AutoDetailsPage = () => {
                             Dashboard
                         </Typography>
                         <div>
+                            <IconButton onClick={handleOpenLanguageMenu}><LanguageIcon style={{ color: 'white' }} /></IconButton>
+
                             <Tooltip title="Open settings">
                                 {user.data.username === undefined ? <Button variant='contained' color='error' >Login</Button>
                                     : <IconButton color="inherit" onClick={handleOpenUserMenu}>
@@ -147,6 +167,38 @@ export const AutoDetailsPage = () => {
                             </Tooltip>
                         </div>
                     </Toolbar>
+                    <Menu
+                        sx={{ mt: '35px' }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUserLanguage}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElUserLanguage)}
+                        onClose={handleCloseUserMenuLanguage}
+                    >
+                        <MenuItem onClick={() => handleCloseUserMenuLanguage('EN')}>
+                            <div>
+                                <span><US style={{ width: '20px', marginRight: '5px' }} /></span>EN
+                            </div>
+                        </MenuItem>
+                        <MenuItem onClick={() => handleCloseUserMenuLanguage('NL')}>
+                            <div>
+                                <span><NL style={{ width: '20px', marginRight: '5px' }} /></span>NL
+                            </div>
+                        </MenuItem>
+                        <MenuItem onClick={() => handleCloseUserMenuLanguage('FR')}>
+                            <div>
+                                <span><FR style={{ width: '20px', marginRight: '5px' }} /></span>FR
+                            </div>
+                        </MenuItem>
+                    </Menu>
                     <Menu
                         sx={{ mt: '35px' }}
                         id="menu-appbar"
@@ -218,7 +270,7 @@ export const AutoDetailsPage = () => {
                         <Divider sx={{ my: 1 }} />
                         <React.Fragment>
                             <ListSubheader component="div" inset>
-                            {t('dashboard.savedreports')}
+                                {t('dashboard.savedreports')}
                             </ListSubheader>
                             <ListItemButton>
                                 <ListItemIcon>

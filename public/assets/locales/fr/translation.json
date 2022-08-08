@@ -1,4 +1,84 @@
 {
-    "Welcome to React": "bonjour2",
-    "welcome": "welcomefr"
+    "mainpage.description":"Cette application vous aide à suivre l'état du carburant de la voiture.",
+    "mainpage.showmore":"Montre plus",
+    "mainpage.projectdescription":"Cette application est développée par Omer Faruk Aksak. Dans cette application, Spring boot est utilisé pour le backend, React.js est utilisé pour le frontend et Postgresql est utilisé pour la base de données. Le développement de l'application a pour but le devoir du gip5 du 2ème semestre 2022.",
+    "mainpage.abilitiesofapp":"Dans cette application, vous pouvez vous inscrire, vous connecter, ajouter une voiture à votre compte, afficher les informations actuelles de vos voitures, apporter des modifications et supprimer la voiture si vous le souhaitez. De plus, vous pouvez ravitailler votre véhicule en roulant et enregistrer ces informations. Vous pouvez consulter ces informations ultérieurement dans l'ordre chronologique et consulter les statistiques créées à partir de ces informations.",
+    "mainpage.thanks":"J'espère que vous apprécierez l'utiliser.",
+
+    "login.password":"Mot de passe",
+    "login.rememberme":"Souviens-toi de moi",
+    "login.login":"Connexion",
+    "login.passwordforgot":"Mot de passe oublié?",
+    "login.signup":"Vous n'avez pas de compte? S'inscrire",
+
+
+    "register.signup":"S'inscrire",
+    "register.firstName":"Prénom",
+    "register.lastname":"Nom de famille",
+    "register.password":"Mot de passe",
+    "register.marketing":"Je souhaite recevoir de l'inspiration, des campagnes marketing et des mises à jour par e-mail.",
+    "register.returnlogin":"Avez-vous déjà un compte? Connexion",
+    "dashboard.usermenu.profile":"Profil",
+    "dashboard.usermenu.logout":"Se déconnecter",
+    "dashboard.add.autousage":"Autoutilisation Ajouter",
+    "dashbard.savedreports":"Rapports enregistrés",
+    "dashboard.currentMonth":"Ce mois-ci",
+    "dashboard.lastQuarter":"Dernier quart",
+    "dashboard.yearandsale":"Année et ventes",
+    "dashboard.maand":"mois",
+    "dashboard.alltime":"Tout le temps",
+
+
+
+    "chart.today":"Aujourd'hui",
+    "chart.buys":"Achète",
+
+
+
+    "deposit.allbrandcost":"Coûts totaux du carburant",
+    "deposit.totalrefueling":"Nombre total de ravitaillements",
+
+
+
+    "autotable.autolist":"Liste des voitures",
+    "autotable.addauto":"Ajouter une voiture",
+    "autotable.platenumber":"Numéro de la plaque",
+    "datatable.constructionyear":"Année de construction",
+    "autousage.addform.title":"Formulaire d'utilisation automatique",
+    "autousage.distance":"Distance",
+    "autousage.fuelusage":"Quantité de carburant Consommation",
+    "save":"Sauvegarder",
+
+    "fuel":"Le carburant",
+    "price":"Prix",
+    "cancel":"Annuler",
+    "capacity":"Capacité du réservoir",
+    "addbrandstof.info":"Entrez le montant et le prix avec lesquels vous avez fait le plein de la voiture.",
+
+
+    "autodetails.totalautousage":"Utilisation automatique totale",
+    "totaldistance":"Distance totale",
+    "countusage":"Nombre d'utilisations",
+    "totalfuelusage":"Consommation totale de carburant",
+    "nodata":"Pas de données",
+
+    "recent.autousage":"Utilisation automatique récente",
+    "date":"Date",
+
+    "countofrefueling":"Nombre de ravitaillements",
+    "totalcost":"Prix ​​total",
+    "recentefuelbuys":"Achats récents de carburant",
+
+    "fuelamount":"Quantité de carburant",
+    "refuelingdate":"Date de ravitaillement",
+    "car.editform":"Formulaire de modification de voiture",
+    "car.addform" :"Formulaire d'ajout de voiture",
+
+
+
+    "login.success":"Connexion réussie",
+    "login.success.message":"Nous vous renverrons à la page de connexion Dans",
+
+    "share":"Partager",
+    "learnmore":"Apprendre encore plus"
 }
