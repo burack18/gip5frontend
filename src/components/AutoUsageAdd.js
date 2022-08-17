@@ -126,7 +126,7 @@ export const AutoUsageAdd = () => {
   };
 
   const handleCloseUserMenu = (setting) => {
-    if (setting === 'Logout' ||setting === 'Uitloggen') {
+    if (setting === 'Log Out' ||setting === 'Uitloggen'|| setting ==='Se déconnecter') {
       dispatch(logout())
       navigate('/login')
     }
@@ -343,8 +343,8 @@ export const AutoUsageAdd = () => {
                     </Typography>
 
                     <Form style={{ marginTop: '5%' }}>
-                      <Grid container spacing={2}>
-                        <Grid item xs={3}>
+                      <Grid container spacing={5}>
+                        <Grid item xs={4}>
                           <FormControl fullWidth>
                             <InputLabel>Auto</InputLabel>
                             <Select                             
@@ -373,9 +373,9 @@ export const AutoUsageAdd = () => {
                             />
                           </FormControl>
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={5}>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={4}>
                           <FormControl fullWidth>
                             <InputLabel >{t('autousage.fuelusage')}</InputLabel>
                             <FilledInput

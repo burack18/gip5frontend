@@ -115,7 +115,7 @@ export const AutoDetailsPage = () => {
     };
 
     const handleCloseUserMenu = (setting) => {
-        if (setting === 'Logout' || setting === 'Uitloggen') {
+        if (setting === 'Log Out' || setting === 'Uitloggen'|| setting ==='Se déconnecter') {
             dispatch(logout())
             navigate('/login')
         }

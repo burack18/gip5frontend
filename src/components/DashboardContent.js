@@ -141,7 +141,7 @@ function DashboardContent() {
   };
 
   const handleCloseUserMenu = (setting) => {
-    if (setting === 'Logout' || setting === 'Uitloggen') {
+    if (setting === 'Log Out' || setting === 'Uitloggen' || setting ==='Se déconnecter') {
       dispatch(logout())
       navigate('/login')
     }
@@ -264,7 +264,7 @@ function DashboardContent() {
           </Toolbar>
           <Divider />
           <List component="nav" >
-            <ListItemButton onClick={() => navigate('/dashboard')}>
+            <ListItemButton onClick={() => {navigate('/dashboard')}}>
               <ListItemIcon>
                 <DashboardIcon />
               </ListItemIcon>
@@ -299,19 +299,19 @@ function DashboardContent() {
               <ListSubheader component="div" inset>
                 {t('dashbard.savedreports')}
               </ListSubheader>
-              <ListItemButton>
+              <ListItemButton onClick={()=>setdateFilter(1)}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary={t('dashboard.currentMonth')} />
               </ListItemButton>
-              <ListItemButton>
+              <ListItemButton onClick={()=>setdateFilter(3)}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
                 <ListItemText primary={t('dashboard.lastQuarter')} />
               </ListItemButton>
-              <ListItemButton>
+              <ListItemButton onClick={()=>setdateFilter(12)}>
                 <ListItemIcon>
                   <AssignmentIcon />
                 </ListItemIcon>
@@ -337,6 +337,7 @@ function DashboardContent() {
             <FormControl style={{ width: '120px' }}>
               <InputLabel id="demo-simple-select-label">Filter</InputLabel>
               <Select labelId="demo-simple-select-label" value={dateFilter} onChange={(e) => setdateFilter(e.target.value)}>
+                <MenuItem value={1}>1 {t('dashboard.maand')}</MenuItem>
                 <MenuItem value={3}>3 {t('dashboard.maand')}</MenuItem>
                 <MenuItem value={6}>6 {t('dashboard.maand')}</MenuItem>
                 <MenuItem value={12}>12 {t('dashboard.maand')}(1 year)</MenuItem>
