@@ -4,7 +4,7 @@
     "mainpage.projectdescription":"This application is developed by Omer Faruk Aksak. In this application, Spring boot is used for the backend, React.js is used for the frontend and Postgresql is used for the database. The purpose of developing the application is the 2022 2nd semester gip5 homework.",
     "mainpage.abilitiesofapp":"In this application you can register, log in, add a car to your account, view the current information of your cars, make changes and delete the car if you wish. In addition, you can refuel your vehicle while driving and record this information. You can view this information later in chronological order and view the statistics created from this information.",
     "mainpage.thanks":"I hope you enjoy using it.",
-
+    "LoginToContinue":"Login to Continue",
     "login.password":"Password",
     "login.rememberme":"Remember me",
     "login.login":"Login",
@@ -74,7 +74,10 @@
     "car.editform":"Car Edit Form",
     "car.addform" :"Car Add Form",
 
-
+    "model":"Model",
+    "brand":"Brand",
+    "Tank Volume":"Tank Volume",
+    "Brandstof":"Fuel",
 
     "login.success":"Successful login",
     "login.success.message":"We'll send you to the login page In",

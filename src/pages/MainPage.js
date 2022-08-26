@@ -73,7 +73,7 @@ export const MainPage = () => {
                     <IconButton aria-label="add to favorites" onClick={()=>like()} >
                         <FavoriteIcon color={likeColor}  />
                     </IconButton>
-                    <IconButton color='primary' onClick={()=>navigate('/login')}><LoginOutlinedIcon />Login to continue</IconButton>
+                    <IconButton color='primary' onClick={()=>navigate('/login')}><LoginOutlinedIcon />{t('LoginToContinue')}</IconButton>
                    
                         <ExpandMore
                             expand={expanded}

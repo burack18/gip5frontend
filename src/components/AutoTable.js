@@ -70,12 +70,12 @@ export default function AutoTable({ transition }) {
             <TableHead>
               <TableRow>
 
-                <TableCell>Merk</TableCell>
-                <TableCell>Model</TableCell>
+                <TableCell>{t('brand')}</TableCell>
+                <TableCell>{t('model')}</TableCell>
                 <TableCell>{t('autotable.platenumber')}</TableCell>
                 <TableCell>{t('datatable.constructionyear')}</TableCell>
-                <TableCell>Tank Volume</TableCell>
-                <TableCell>Brandstof</TableCell>
+                <TableCell>{t('Tank Volume')}</TableCell>
+                <TableCell>{t('Brandstof')}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody >

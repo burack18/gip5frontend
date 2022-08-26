@@ -4,7 +4,7 @@
     "mainpage.projectdescription":"Cette application est développée par Omer Faruk Aksak. Dans cette application, Spring boot est utilisé pour le backend, React.js est utilisé pour le frontend et Postgresql est utilisé pour la base de données. Le développement de l'application a pour but le devoir du gip5 du 2ème semestre 2022.",
     "mainpage.abilitiesofapp":"Dans cette application, vous pouvez vous inscrire, vous connecter, ajouter une voiture à votre compte, afficher les informations actuelles de vos voitures, apporter des modifications et supprimer la voiture si vous le souhaitez. De plus, vous pouvez ravitailler votre véhicule en roulant et enregistrer ces informations. Vous pouvez consulter ces informations ultérieurement dans l'ordre chronologique et consulter les statistiques créées à partir de ces informations.",
     "mainpage.thanks":"J'espère que vous apprécierez l'utiliser.",
-
+    "LoginToContinue":"Connectez-vous pour continuer",
     "login.password":"Mot de passe",
     "login.rememberme":"Souviens-toi de moi",
     "login.login":"Connexion",
@@ -74,7 +74,11 @@
     "car.editform":"Formulaire de modification de voiture",
     "car.addform" :"Formulaire d'ajout de voiture",
 
+    "brand":"Marque",
+    "model":"Mannequin",
 
+    "Tank Volume":"Volume du réservoir",
+    "Brandstof":"Le carburant",
 
     "login.success":"Connexion réussie",
     "login.success.message":"Nous vous renverrons à la page de connexion Dans",

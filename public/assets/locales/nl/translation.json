@@ -5,6 +5,7 @@
     "mainpage.abilitiesofapp":"In deze applicatie kunt u zich registreren, inloggen, een auto toevoegen aan uw account, de actuele informatie van uw auto's bekijken, wijzigingen aanbrengen en desgewenst de auto verwijderen. Daarnaast kunt u tijdens het rijden uw voertuig tanken en deze informatie vastleggen. U kunt deze informatie later in chronologische volgorde bekijken en de statistieken bekijken die op basis van deze informatie zijn gemaakt.",
     "mainpage.thanks":"Ik hoop dat je het leuk vindt om het te gebruiken.",
 
+    "LoginToContinue":"Log in om door te gaan",
     "login.password":"Wachtwoord",
     "login.rememberme":"Onthoud mij",
     "login.login":"Inloggen",
@@ -74,7 +75,12 @@
     "car.editform":"Auto Arrangement Formulier",
     "car.addform" :"Voertuig toevoegen formulier",
 
+    "brand":"Merk",
+    "model":"Model",
 
+
+    "Tank Volume":"Tank Volume",
+    "Brandstof":"Brandstof",
 
     "login.success":"Succesvol inloggen",
     "login.success.message":"We sturen u naar de inlogpagina In",
