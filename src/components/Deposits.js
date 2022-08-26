@@ -62,13 +62,13 @@ const getTotalBrandCost = async () => {
     <React.Fragment>
       <Title>{t('deposit.allbrandcost')}</Title>
       <Typography component="p" variant="h4">
-        ${totalCost.totalCost}
+      €{totalCost.totalCost}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
         {moment().format('MM/dd/yyyy')}
       </Typography>
       <Typography color="text.secondary" sx={{ flex: 1 }}>
-        {isLoadedTotalAutousage&&<>{(totalCost.totalCost/totalAutoUsage.totalDistance).toFixed(2)} € per km</>}
+        {isLoadedTotalAutousage&&totalAutoUsage&&<>{(totalCost?.totalCost/totalAutoUsage?.totalDistance).toFixed(2)} € per km</>}
       </Typography>
       <div>
         <p>{t('deposit.totalrefueling')} : {totalCost.countOfRefueling} </p>{}
